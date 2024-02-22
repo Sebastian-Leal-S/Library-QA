@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.periferia</groupId>
+	<artifactId>Library-QA</artifactId>
+	<version>0.1-SNAPSHOT</version>
+
+	<properties>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- Gestion version dependencias Automatizacion -->
+		<selenium.version>3.141.59</selenium.version>
+		<webdriver.version>5.1.1</webdriver.version>
+		<testng.version>7.8.0</testng.version>
+
+		<!-- Gestion version depencias generar reportes testng-->
+		<allure-testNG>2.25.0</allure-testNG>
+
+		<!-- Gestion version dependencias logger -->
+		<log4j.version>2.22.1</log4j.version>
+
+		<!-- Gestion version dependencias generar pdf -->
+		<itext-pdf.version>5.5.13.3</itext-pdf.version>
+		<itext-layout.version>8.0.3</itext-layout.version>
+
+		<!-- Gestion version dependencia generar video -->
+		<monte-screen-recorder.version>0.7.7.0</monte-screen-recorder.version>
+
+		<!-- Gestion version dependencias manejo archivos (xlsx, csv) -->
+		<apache-poi.version>5.2.3</apache-poi.version>
+		<open-csv.version>5.7.1</open-csv.version>
+
+		<!-- Gestion version dependencias IA corrector xpath en tiempo de
+		ejecucion -->
+		<healenium-web.version>3.2.1</healenium-web.version>
+	</properties>
+
+	<dependencies>
+		<!-- Dependencias para automatizacion -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-support</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>${webdriver.version}</version>
+		</dependency>
+
+		<!-- Dependencia para generar reportes testng-->
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-testng</artifactId>
+			<version>${allure-testNG}</version>
+		</dependency>
+
+		<!-- Dependencias para registros (logger) -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
+		<!-- Dependecias para generación de pdf -->
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>${itext-pdf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>layout</artifactId>
+			<version>${itext-layout.version}</version>
+		</dependency>
+
+		<!-- Dependencia para generaracion video -->
+		<dependency>
+			<groupId>com.github.stephenc.monte</groupId>
+			<artifactId>monte-screen-recorder</artifactId>
+			<version>${monte-screen-recorder.version}</version>
+		</dependency>
+
+		<!-- Dependencias para leer archivos (xslx, csv)-->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${apache-poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${apache-poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>${open-csv.version}</version>
+		</dependency>
+
+		<!-- Dependencia IA para correccion de xpath en tiempo de ejecucion -->
+		<dependency>
+			<groupId>com.epam.healenium</groupId>
+			<artifactId>healenium-web</artifactId>
+			<version>${healenium-web.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>
