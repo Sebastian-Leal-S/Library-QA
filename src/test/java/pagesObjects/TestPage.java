@@ -11,9 +11,11 @@ public class TestPage extends TestMap {
     }
 
     public void loginWithEvidence(String user, String password) {
-        Periferia.sendkey(inputUser, user, "Ingreso usuario");
+    	Periferia.sendkey(inputUser, user, "Ingreso usuario");
         Periferia.sendkey(inputPassword, password, "Ingreso contraseña");
 
+        Periferia.isDisplayed(btnLogin);
+        
         Periferia.click(btnLogin, "Clic boton login");
     }
 
@@ -22,9 +24,5 @@ public class TestPage extends TestMap {
         Periferia.sendkey(inputPassword, password);
 
         Periferia.click(btnLogin);
-    }
-
-    public void logout(){
-        // Automatizacion para cerrar sesion
     }
 }
