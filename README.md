@@ -6,16 +6,18 @@
 
 ### Maven
 
-Comando de instalacion desde CMD
+Comando de instalacion CMD
 ```CMD
 mvn install:install-file -Dfile=<Ruta libreria>\Library-QA.jar -DgroupId=com.periferia -DartifactId=Library-QA -Dversion=<Version Library-QA> -Dpackaging=jar
 ```
 
-Llamado dependencia desde pom.xml
+Llamado dependencia en pom.xml
 ``` Maven
-<dependency>
-	<groupId>com.periferia</groupId>
-    <artifactId>Library-QA</artifactId>
-    <version>${Library-QA.version}</version>
-</dependency>
+<dependencies>
+	<dependency>
+		<groupId>com.periferia</groupId>
+	    <artifactId>Library-QA</artifactId>
+	    <version>${Library-QA.version}</version>
+	</dependency>
+</dependencies>
 ```
