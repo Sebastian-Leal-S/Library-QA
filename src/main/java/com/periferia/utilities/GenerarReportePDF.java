@@ -85,7 +85,7 @@ public class GenerarReportePDF {
         }
     }
 
-    public static void createBody(String mensaje, String rutaImagen) {
+    public static void createBody(String rutaImagen, String mensaje) {
         Paragraph parrafo = new Paragraph();
         parrafo.setAlignment(Element.ALIGN_LEFT);
         parrafo.setFont(FONT_MAIN);
@@ -128,7 +128,8 @@ public class GenerarReportePDF {
     public static void createErrorBody(By locator, String rutaImagen, String errorMessage)
             throws DocumentException, IOException {
 
-        Paragraph localizador = new Paragraph();// OBTENER EL NOMBRE DEL LOCALIZADOR
+        //TODO: Comprobrar la reducdacia de este parrafo
+        Paragraph localizador = new Paragraph();
         localizador.setAlignment(Element.ALIGN_LEFT);
         localizador.setFont(FONT_MAIN);
         localizador.add("Acción: " + locator);
@@ -150,12 +151,12 @@ public class GenerarReportePDF {
         Paragraph elementoError = new Paragraph();
         elementoError.setAlignment(Element.ALIGN_LEFT);
         elementoError.setFont(FONT_ERROR);
-        elementoError.add("\nAccion con error: " + locator);
+        elementoError.add("\nFallo al momento de interactuar con: " + locator + "/n");
 
         Paragraph parrafoError = new Paragraph();
         parrafoError.setAlignment(Element.ALIGN_LEFT);
         parrafoError.setFont(FONT_ERROR);
-        parrafoError.add("\nMENSAJE DE ERROR:\n" + errorMessage);
+        parrafoError.add("\nMensaje de la accion fallida: " + errorMessage + "/n");
 
         documento.add(elementoError);
         documento.add(parrafoError);
