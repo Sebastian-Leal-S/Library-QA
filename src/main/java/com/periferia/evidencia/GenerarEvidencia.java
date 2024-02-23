@@ -25,7 +25,7 @@ public class GenerarEvidencia {
 
     public static void capturarEvidencia(WebDriver driver, String texto) {
         String rutaImg = CaptureScreen.captureScreen(driver, rutaCarpeta);
-        GenerarReportePDF.createBody(texto, rutaImg);
+        GenerarReportePDF.createBody(rutaImg, texto);
         GestorArchivos.eliminarArchivo(rutaImg);
     }
 
