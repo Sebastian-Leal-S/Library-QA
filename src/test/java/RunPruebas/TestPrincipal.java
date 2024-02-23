@@ -8,16 +8,19 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pagesObjects.TestPage;
 
 public class TestPrincipal {
 
     static SelfHealingDriver driver;
     static TestPage testPage;
+
+    @DataProvider(name = "dpGeneral")
+    public Object[][] dpGeneral() {
+        //TODO: Extraer informacion de un archivo facil de editar
+        return null;
+    }
 
     @BeforeTest
     public void beforeTest() {
@@ -29,12 +32,6 @@ public class TestPrincipal {
         testPage = new TestPage(driver);
     }
 
-    @DataProvider
-    public Object[][] dpGeneral() {
-        //TODO: Extraer informacion de un archivo facil de editar
-        return null;
-    }
-
     @Test
     @Severity(SeverityLevel.NORMAL)
 	@Story("Pruebas library-QA")
@@ -44,7 +41,7 @@ public class TestPrincipal {
 
         driver = Periferia.setUp(Navegador.CHROME, "https://demoqa.com/login");
 
-        GenerarEvidencia.iniciarEvidencia(nameTest, "Name Analista", "Url page");
+        GenerarEvidencia.iniciarEvidencia(nameTest, "Nombre Analista", "Url page");
 
         testPage.loginWithEvidence("User", "Password");
 
