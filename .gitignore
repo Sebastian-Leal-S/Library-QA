@@ -38,6 +38,9 @@ build/
 ### Mac OS ###
 .DS_Store
 
+### Docs ###
+/doc/
+
 ### Test output ###
 /test-output/
 /outputData/
