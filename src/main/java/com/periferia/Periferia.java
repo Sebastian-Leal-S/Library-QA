@@ -27,9 +27,9 @@ public class Periferia {
     //TODO: Implementar evidencia de las excepcioens
 
     /**
-     *  Navega a la URL especificada.
-     *
-     * @param url  la URL a la que navegar
+     * Navigates to the specified URL.
+     * 
+     * @param url the URL to navigate to
      */
     public static void goUrl(String url) {
         //TODO: Implementar logger: Se navega a la url
@@ -171,6 +171,63 @@ public class Periferia {
         return textoExtraido;
     }
 
+    public static boolean isDisplayed(By locator) {
+    	//TODO: Implementar logger
+    	try {
+			return driver.findElement(locator).isDisplayed();
+		} catch (Exception e) {
+			return false;
+		}
+    }
+    
+    public static boolean isDisplayed(By locator, String textoEvidencia) {
+    	//TODO: Implementar logger
+    	try {
+    		GenerarEvidencia.capturarEvidencia(driver, textoEvidencia);
+			return driver.findElement(locator).isDisplayed();
+		} catch (Exception e) {
+			return false;
+		}
+    }
+    
+    public static boolean isEnabled(By locator) {
+    	//TODO: Implementar logger
+    	try {
+			return driver.findElement(locator).isEnabled();
+		} catch (Exception e) {
+			return false;
+		}
+    }
+
+    public static boolean isEnabled(By locator, String textoEvidencia) {
+    	//TODO: Implementar logger
+    	try {
+    		GenerarEvidencia.capturarEvidencia(driver, textoEvidencia);
+    		return driver.findElement(locator).isEnabled();
+    	} catch (Exception e) {
+    		return false;
+    	}
+    }
+    
+    public static boolean isSelected(By locator) {
+    	//TODO: Implementar logger
+    	try {
+			return driver.findElement(locator).isSelected();
+		} catch (Exception e) {
+			return false;
+		}
+    }
+    
+    public static boolean isSelected(By locator, String textoEvidencia) {
+    	//TODO: Implementar logger
+    	try {
+    		GenerarEvidencia.capturarEvidencia(driver, textoEvidencia);
+    		return driver.findElement(locator).isSelected();
+    	} catch (Exception e) {
+    		return false;
+    	}
+    }
+    
     /**
      * Prints the object to the console.
      *
