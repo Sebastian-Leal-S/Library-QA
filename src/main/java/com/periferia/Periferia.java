@@ -14,6 +14,7 @@ import org.openqa.selenium.By;
  * @author Periferia IT Group - Automation Equipment
  */
 public class Periferia {
+
     protected static SelfHealingDriver driver;
 
     private static final Logger logger = LogManager.getLogger(Periferia.class);
@@ -23,34 +24,70 @@ public class Periferia {
     }
 
     //FIXME: Implementar correcto manejo de excepsiones
+    //TODO: Implementar evidencia de las excepcioens
 
+    /**
+     *  Navega a la URL especificada.
+     *
+     * @param url  la URL a la que navegar
+     */
     public static void goUrl(String url) {
+        //TODO: Implementar logger: Se navega a la url
         driver.get(url);
     }
 
+    /**
+     * Sets up the SelfHealingDriver with the specified browser.
+     *
+     * @param navegador the browser to use
+     * @return the initialized SelfHealingDriver
+     */
     public static SelfHealingDriver setUp(Navegador navegador) {
+        //TODO: Implementar logger: Driver {Navegador.type} inicializado
         driver = SeleniumDriver.initDriver(navegador);
         return driver;
     }
 
+    /**
+     * Sets up the SelfHealingDriver with the specified browser and navigates to the specified URL.
+     *
+     * @param navegador the browser to use
+     * @param url the URL to navigate to
+     * @return the initialized SelfHealingDriver
+     */
     public static SelfHealingDriver setUp(Navegador navegador, String url) {
+        //TODO: Implementar logger: Driver {Navegador.type} inicializado y url proyecto
         driver = SeleniumDriver.initDriver(navegador);
         goUrl(url);
         return driver;
     }
 
+    /**
+     * Closes the driver.
+     */
     public static void closeDriver() {
         if (driver != null){
             driver.quit();
         }
     }
 
+    /**
+     * Clicks the element located by the given locator.
+     *
+     * @param locator the locator of the element to click
+     */
     public static void click(By locator) {
         //TODO: Colocar una funcion para tener tiempo de espera dinamico
         driver.findElement(locator).click();
         logger.info("Clic sobre el elemento: {} ", locator);
     }
 
+    /**
+     * Click the element located by the given locator and captures evidence with the specified text.
+     *
+     * @param locator the locator of the element to click
+     * @param textoEvidencia the text for capturing evidence
+     */
     public static void click(By locator, String textoEvidencia) {
         //TODO: Colocar una funcion para tener tiempo de espera dinamico
         driver.findElement(locator).click();
@@ -58,12 +95,25 @@ public class Periferia {
         logger.info("Clic sobre el elemento: {} ", locator);
     }
 
+    /**
+     * Sends the input text to the element located by the given locator.
+     *
+     * @param locator the locator of the element to send the text
+     * @param inputText the text to be sent to the element
+     */
     public static void sendkey(By locator, String inputText) {
         //TODO: Colocar una funcion para tener tiempo de espera dinamico
         driver.findElement(locator).sendKeys(inputText);
         logger.info("Se envia el texto: {}, al elemento {}", inputText, locator);
     }
 
+    /**
+     * Sends the input text to the element located by the given locator and captures evidence with the specified text.
+     *
+     * @param locator the locator of the element to send the text
+     * @param inputText the text to be sent to the element
+     * @param textoEvidencia the text for capturing evidence
+     */
     public static void sendkey(By locator, String inputText, String textoEvidencia) {
         //TODO: Colocar una funcion para tener tiempo de espera dinamico
         driver.findElement(locator).sendKeys(inputText);
@@ -71,12 +121,23 @@ public class Periferia {
         logger.info("Se envia el texto: {}, al elemento {}", inputText, locator);
     }
 
+    /**
+     * Clears the input field located by the given locator.
+     *
+     * @param locator the locator of the input field to clear
+     */
     public static void clean(By locator) {
         //TODO: Colocar una funcion para tener tiempo de espera dinamico
         driver.findElement(locator).clear();
         logger.info("Se limpia el elemento: {}", locator);
     }
 
+    /**
+     * Clears the input field located by the given locator and captures evidence with the specified text.
+     *
+     * @param locator the locator of the input field to clear
+     * @param textoEvidencia the text for capturing evidence
+     */
     public static void clean(By locator, String textoEvidencia) {
         //TODO: Colocar una funcion para tener tiempo de espera dinamico
         driver.findElement(locator).clear();
@@ -84,6 +145,11 @@ public class Periferia {
         logger.info("Se limpia el elemento: {}", locator);
     }
 
+    /**
+     * Clears the input field located by the given locator.
+     *
+     * @param locator the locator of the input field to clear
+     */
     public static String getText(By locator) {
         //TODO: Colocar una funcion para tener tiempo de espera dinamico
         String textoExtraido = driver.findElement(locator).getText();
@@ -91,6 +157,12 @@ public class Periferia {
         return textoExtraido;
     }
 
+    /**
+     * Clears the input field located by the given locator and captures evidence with the specified text.
+     *
+     * @param locator the locator of the input field to clear
+     * @param textoEvidencia the text for capturing evidence
+     */
     public static String getText(By locator, String textoEvidencia) {
         //TODO: Colocar una funcion para tener tiempo de espera dinamico
         String textoExtraido = driver.findElement(locator).getText();
@@ -99,6 +171,11 @@ public class Periferia {
         return textoExtraido;
     }
 
+    /**
+     * Prints the object to the console.
+     *
+     * @param obj the object to be printed
+     */
     public static void printConsole(Object obj) {
         System.out.println(obj);
     }
