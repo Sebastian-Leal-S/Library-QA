@@ -38,6 +38,9 @@ build/
 ### Mac OS ###
 .DS_Store
 
+### git-sim ###
+/git-sim_media
+
 ### Docs ###
 /doc/
 
