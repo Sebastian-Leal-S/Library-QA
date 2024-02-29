@@ -48,6 +48,13 @@ public class Periferia {
         return driver;
     }
 
+    public static SelfHealingDriver setUp(String navegador) {
+        //TODO: Implementar logger: Driver {Navegador.type} inicializado
+        Navegador navegadorEmun = Navegador.valueOf(navegador.toUpperCase());
+        driver = SeleniumDriver.initDriver(navegadorEmun);
+        return driver;
+    }
+
     /**
      * Sets up the SelfHealingDriver with the specified browser and navigates to the specified URL.
      *
@@ -55,9 +62,18 @@ public class Periferia {
      * @param url the URL to navigate to
      * @return the initialized SelfHealingDriver
      */
-    public static SelfHealingDriver setUp(Navegador navegador, String url) {
+    public static SelfHealingDriver
+    setUp(Navegador navegador, String url) {
         //TODO: Implementar logger: Driver {Navegador.type} inicializado y url proyecto
         driver = SeleniumDriver.initDriver(navegador);
+        goUrl(url);
+        return driver;
+    }
+
+    public static SelfHealingDriver setUp(String navegador, String url) {
+        //TODO: Implementar logger: Driver {Navegador.type} inicializado
+        Navegador navegadorEmun = Navegador.valueOf(navegador.toUpperCase());
+        driver = SeleniumDriver.initDriver(navegadorEmun);
         goUrl(url);
         return driver;
     }
