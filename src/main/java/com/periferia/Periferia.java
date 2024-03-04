@@ -6,7 +6,8 @@ import com.periferia.driver_manager.SeleniumDriver;
 import com.periferia.evidencia.GenerarEvidencia;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.*;
 
 /**
  * Librería interna Equipo Automatización para pruebas QA en Periferia IT Group.
@@ -87,14 +88,28 @@ public class Periferia {
         }
     }
 
+    public static WebElement findElement(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        try {
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        }catch (NoSuchElementException exception) {
+            logger.error("Elemento no encontrado: {}", exception.getMessage());
+            return null;
+        }
+    }
+
+    public static WebElement findElement(By locator, int timeout) {
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
     /**
      * Clicks the element located by the given locator.
      *
      * @param locator the locator of the element to click
      */
     public static void click(By locator) {
-        //TODO: Colocar una funcion para tener tiempo de espera dinamico
-        driver.findElement(locator).click();
+        Periferia.findElement(locator).click();
         logger.info("Clic sobre el elemento: {} ", locator);
     }
 
@@ -250,6 +265,6 @@ public class Periferia {
      * @param obj the object to be printed
      */
     public static void printConsole(Object obj) {
-        System.out.println(obj);
+        logger.info(obj);
     }
 }
