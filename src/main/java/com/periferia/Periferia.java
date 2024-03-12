@@ -196,6 +196,40 @@ public class Periferia {
             throw e;
         }
     }
+
+    // Send keys
+    public static void sendKeys(By locator, String texto) {
+        try {
+            WebElement element = findElement(locator);
+            element.sendKeys(texto);
+            log.info("Envio de texto '{}' sobre el elemento: {}", texto, locator);
+        } catch (Exception e) {
+            log.fatal("No fue posible realizar el envio de texto sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+
+    public static String getTitle() {
+        return driver.getTitle();
+    }
+
+    public static String getCurrentUrl() {
+        return driver.getCurrentUrl();
+    }
+
+    public static void backPage() {
+        driver.navigate().back();
+    }
+
+    public static void forwardPage() {
+        driver.navigate().forward();
+    }
+
+    public static void refreshPage() {
+        driver.navigate().refresh();
+    }
+
     public static void printConsole(Object message){
         System.out.println(message);
     }
