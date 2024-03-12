@@ -34,7 +34,7 @@ public class GenerarReportePDF {
     public static void createTemplate(File filePath, String nameTest, String nameAnalyst, String url) {
         try {
             TiempoEjecucion.start();
-            String nameFile = "\\Reporte " + nameTest + " " + HoraSistema.currentDate("HH-mm-ss") + ".pdf";
+            String nameFile = "\\" + nameTest + "_" + HoraSistema.currentDate("HH-mm-ss") + ".pdf";
             FileOutputStream archivo = new FileOutputStream(filePath + nameFile);
             PdfWriter writer = PdfWriter.getInstance(documento, archivo);
 
