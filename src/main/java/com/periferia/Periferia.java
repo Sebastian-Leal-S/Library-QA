@@ -7,7 +7,8 @@ import com.periferia.evidencia.GenerarEvidencia;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Librería interna Equipo Automatización para pruebas QA en Periferia IT Group.
@@ -17,254 +18,179 @@ import org.openqa.selenium.support.ui.*;
 public class Periferia {
 
     protected static SelfHealingDriver driver;
-
-    private static final Logger logger = LogManager.getLogger(Periferia.class);
+    protected static Logger log = LogManager.getLogger(Periferia.class);
 
     private Periferia() {
         throw new IllegalStateException("Utility class");
     }
 
-    //FIXME: Implementar correcto manejo de excepsiones
-    //TODO: Implementar evidencia de las excepcioens
-
-    /**
-     * Navigates to the specified URL.
-     * 
-     * @param url the URL to navigate to
-     */
-    public static void goUrl(String url) {
-        //TODO: Implementar logger: Se navega a la url
-        driver.get(url);
+    // getDriver
+    public static SelfHealingDriver getDriver() {
+        return driver;
     }
 
+    // Set up
     /**
-     * Sets up the SelfHealingDriver with the specified browser.
+     * Configura y inicializa el controlador de Selenium.
      *
-     * @param navegador the browser to use
-     * @return the initialized SelfHealingDriver
+     * @param navegador El navegador que se utilizará para la prueba.
+     * @return El controlador de Selenium configurado y listo para usar.
+     * @throws WebDriverException Si ocurre un error al inicializar el controlador de Selenium.
      */
     public static SelfHealingDriver setUp(Navegador navegador) {
-        //TODO: Implementar logger: Driver {Navegador.type} inicializado
-        driver = SeleniumDriver.initDriver(navegador);
+        try {
+            log.info("Inicializando el driver... con el navegador {}", navegador);
+            driver = SeleniumDriver.initDriver(navegador);
+            log.info("Driver inicializado correctamente");
+        }catch (WebDriverException e){
+            log.fatal("Error al inicializar el controlador: {}", e.getMessage());
+            throw new WebDriverException("No se pudo inicializar el driver", e);
+        }
         return driver;
     }
 
-    public static SelfHealingDriver setUp(String navegador) {
-        //TODO: Implementar logger: Driver {Navegador.type} inicializado
-        Navegador navegadorEmun = Navegador.valueOf(navegador.toUpperCase());
-        driver = SeleniumDriver.initDriver(navegadorEmun);
+    public static SelfHealingDriver setUp(Navegador navegador, String url) {
+        try {
+            log.info("Inicializando el driver... con el navegador {}", navegador);
+            driver = SeleniumDriver.initDriver(navegador);
+            log.info("Driver inicializado correctamente");
+            Periferia.goUrl(url);
+        }catch (WebDriverException e){
+            log.fatal("Error al inicializar el controlador: {}", e.getMessage());
+            throw new WebDriverException("No se pudo inicializar el driver", e);
+        }
         return driver;
     }
 
     /**
-     * Sets up the SelfHealingDriver with the specified browser and navigates to the specified URL.
+     * Configura y inicializa el controlador de Selenium con el navegador especificado.
      *
-     * @param navegador the browser to use
-     * @param url the URL to navigate to
-     * @return the initialized SelfHealingDriver
+     * @param navegador El nombre del navegador que se utilizará para la prueba (por ejemplo, "CHROME", "FIREFOX" o "EDGE").
+     * @return El controlador de Selenium configurado y listo para usar.
+     * @throws IllegalArgumentException Si el nombre del navegador no es válido.
+     * @throws WebDriverException Si ocurre un error al inicializar el controlador de Selenium.
      */
-    public static SelfHealingDriver
-    setUp(Navegador navegador, String url) {
-        //TODO: Implementar logger: Driver {Navegador.type} inicializado y url proyecto
-        driver = SeleniumDriver.initDriver(navegador);
-        goUrl(url);
+    public static SelfHealingDriver setUp(String navegador) {
+        try {
+            Navegador navegadorEmun = Navegador.valueOf(navegador.toUpperCase());
+
+            log.info("Inicializando el driver... con el navegador {}", navegadorEmun);
+            driver = SeleniumDriver.initDriver(navegadorEmun);
+            log.info("Driver inicializado correctamente");
+        }catch (IllegalArgumentException e){
+            log.fatal("El navegador no es valido: {}", e.getMessage());
+            throw new IllegalArgumentException("El navegador no es valido", e);
+        }catch (WebDriverException e){
+            log.fatal("Error al inicializar el controlador: {}", e.getMessage());
+            throw new WebDriverException("No se pudo inicializar el driver", e);
+        }
         return driver;
     }
 
     public static SelfHealingDriver setUp(String navegador, String url) {
-        //TODO: Implementar logger: Driver {Navegador.type} inicializado
-        Navegador navegadorEmun = Navegador.valueOf(navegador.toUpperCase());
-        driver = SeleniumDriver.initDriver(navegadorEmun);
-        goUrl(url);
+        try {
+            Navegador navegadorEmun = Navegador.valueOf(navegador.toUpperCase());
+
+            log.info("Inicializando el driver... con el navegador {}", navegadorEmun);
+            driver = SeleniumDriver.initDriver(navegadorEmun);
+            log.info("Driver inicializado correctamente");
+            Periferia.goUrl(url);
+        }catch (IllegalArgumentException e){
+            log.fatal("El navegador no es valido: {}", e.getMessage());
+            throw new IllegalArgumentException("El navegador no es valido", e);
+        }catch (WebDriverException e){
+            log.fatal("Error al inicializar el controlador: {}", e.getMessage());
+            throw new WebDriverException("No se pudo inicializar el driver", e);
+        }
         return driver;
     }
 
+    // Tear down
     /**
-     * Closes the driver.
+     * Cierra el controlador de Selenium si está inicializado.
      */
-    public static void closeDriver() {
+    public static void tearDown() {
         if (driver != null){
             driver.quit();
+            log.info("Driver cerrado correctamente");
         }
     }
 
+    // Go url
+    public static void goUrl(String url) {
+        try {
+            driver.get(url);
+            log.info("Navegando a la url: {}", url);
+        }catch (WebDriverException e){
+            log.fatal("Error al navegar a la url: {}", e.getMessage());
+            throw new WebDriverException("No se pudo navegar a la url", e);
+        }
+    }
+
+    // Find element
     public static WebElement findElement(By locator) {
         WebDriverWait wait = new WebDriverWait(driver, 3);
         try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        }catch (NoSuchElementException exception) {
-            logger.error("Elemento no encontrado: {}", exception.getMessage());
-            return null;
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            log.debug("Elemento encontrado: {}", locator);
+            return element;
+        } catch (Exception e) {
+            log.fatal("No se encontro el elemento: {}, dentro del tiempo de 3 seg. Falla {}", locator, e.getMessage());
+            throw new NoSuchElementException("EL elemento no fue encontrado entre del tiempo de espera de 3 seg: " + locator);
+        }
+    }
+    public static WebElement findElement(By locator, int tiempoEspera) {
+        WebDriverWait wait = new WebDriverWait(driver, tiempoEspera);
+        try {
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            log.debug("Elemento encontrado: {}", locator);
+            return element;
+        } catch (Exception e) {
+            log.fatal("No se encontro el elemento: {}, dentro del tiempo de {} seg. Falla {}", locator, tiempoEspera, e.getMessage());
+            throw new NoSuchElementException("EL elemento "+ locator +" no fue encontrado entre del tiempo de espera de " + tiempoEspera + " seg");
         }
     }
 
-    public static WebElement findElement(By locator, int timeout) {
-        WebDriverWait wait = new WebDriverWait(driver, timeout);
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
-
-    /**
-     * Clicks the element located by the given locator.
-     *
-     * @param locator the locator of the element to click
-     */
+    // Click
     public static void click(By locator) {
-        Periferia.findElement(locator).click();
-        logger.info("Clic sobre el elemento: {} ", locator);
+        try {
+            WebElement element = findElement(locator);
+            element.click();
+            log.info("Click en el elemento: {}", locator);
+        } catch (ElementNotInteractableException e) {
+            log.error("No fue posible realizar clic sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
+            throw e;
+        }
     }
-
-    /**
-     * Click the element located by the given locator and captures evidence with the specified text.
-     *
-     * @param locator the locator of the element to click
-     * @param textoEvidencia the text for capturing evidence
-     */
-    public static void click(By locator, String textoEvidencia) {
-        //TODO: Colocar una funcion para tener tiempo de espera dinamico
-        driver.findElement(locator).click();
-        GenerarEvidencia.capturarEvidencia(driver, textoEvidencia);
-        logger.info("Clic sobre el elemento: {} ", locator);
+    public static void click(By locator, int tiempoEspera) {
+        try {
+            WebElement element = findElement(locator, tiempoEspera);
+            element.click();
+        } catch (ElementNotInteractableException e) {
+            log.fatal("No fue posible realizar clic sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
+            throw e;
+        }
     }
-
-    /**
-     * Sends the input text to the element located by the given locator.
-     *
-     * @param locator the locator of the element to send the text
-     * @param inputText the text to be sent to the element
-     */
-    public static void sendkey(By locator, String inputText) {
-        //TODO: Colocar una funcion para tener tiempo de espera dinamico
-        driver.findElement(locator).sendKeys(inputText);
-        logger.info("Se envia el texto: {}, al elemento {}", inputText, locator);
+    public static void click(By locator, String mensajeEvidencia) {
+        try {
+            WebElement element = findElement(locator);
+            element.click();
+            GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
+        } catch (Exception e) {
+            GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
+            log.fatal("No fue posible realizar clic sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
+            throw e;
+        }
     }
-
-    /**
-     * Sends the input text to the element located by the given locator and captures evidence with the specified text.
-     *
-     * @param locator the locator of the element to send the text
-     * @param inputText the text to be sent to the element
-     * @param textoEvidencia the text for capturing evidence
-     */
-    public static void sendkey(By locator, String inputText, String textoEvidencia) {
-        //TODO: Colocar una funcion para tener tiempo de espera dinamico
-        driver.findElement(locator).sendKeys(inputText);
-        GenerarEvidencia.capturarEvidencia(driver, textoEvidencia);
-        logger.info("Se envia el texto: {}, al elemento {}", inputText, locator);
-    }
-
-    /**
-     * Clears the input field located by the given locator.
-     *
-     * @param locator the locator of the input field to clear
-     */
-    public static void clean(By locator) {
-        //TODO: Colocar una funcion para tener tiempo de espera dinamico
-        driver.findElement(locator).clear();
-        logger.info("Se limpia el elemento: {}", locator);
-    }
-
-    /**
-     * Clears the input field located by the given locator and captures evidence with the specified text.
-     *
-     * @param locator the locator of the input field to clear
-     * @param textoEvidencia the text for capturing evidence
-     */
-    public static void clean(By locator, String textoEvidencia) {
-        //TODO: Colocar una funcion para tener tiempo de espera dinamico
-        driver.findElement(locator).clear();
-        GenerarEvidencia.capturarEvidencia(driver, textoEvidencia);
-        logger.info("Se limpia el elemento: {}", locator);
-    }
-
-    /**
-     * Clears the input field located by the given locator.
-     *
-     * @param locator the locator of the input field to clear
-     */
-    public static String getText(By locator) {
-        //TODO: Colocar una funcion para tener tiempo de espera dinamico
-        String textoExtraido = driver.findElement(locator).getText();
-        logger.info("Se extrajo el texto: {}, del elemento: {}", textoExtraido, locator);
-        return textoExtraido;
-    }
-
-    /**
-     * Clears the input field located by the given locator and captures evidence with the specified text.
-     *
-     * @param locator the locator of the input field to clear
-     * @param textoEvidencia the text for capturing evidence
-     */
-    public static String getText(By locator, String textoEvidencia) {
-        //TODO: Colocar una funcion para tener tiempo de espera dinamico
-        String textoExtraido = driver.findElement(locator).getText();
-        GenerarEvidencia.capturarEvidencia(driver, textoEvidencia);
-        logger.info("Se extrajo el texto: {}, del elemento: {}", textoExtraido, locator);
-        return textoExtraido;
-    }
-
-    public static boolean isDisplayed(By locator) {
-    	//TODO: Implementar logger
-    	try {
-			return driver.findElement(locator).isDisplayed();
-		} catch (Exception e) {
-			return false;
-		}
-    }
-    
-    public static boolean isDisplayed(By locator, String textoEvidencia) {
-    	//TODO: Implementar logger
-    	try {
-    		GenerarEvidencia.capturarEvidencia(driver, textoEvidencia);
-			return driver.findElement(locator).isDisplayed();
-		} catch (Exception e) {
-			return false;
-		}
-    }
-    
-    public static boolean isEnabled(By locator) {
-    	//TODO: Implementar logger
-    	try {
-			return driver.findElement(locator).isEnabled();
-		} catch (Exception e) {
-			return false;
-		}
-    }
-
-    public static boolean isEnabled(By locator, String textoEvidencia) {
-    	//TODO: Implementar logger
-    	try {
-    		GenerarEvidencia.capturarEvidencia(driver, textoEvidencia);
-    		return driver.findElement(locator).isEnabled();
-    	} catch (Exception e) {
-    		return false;
-    	}
-    }
-    
-    public static boolean isSelected(By locator) {
-    	//TODO: Implementar logger
-    	try {
-			return driver.findElement(locator).isSelected();
-		} catch (Exception e) {
-			return false;
-		}
-    }
-    
-    public static boolean isSelected(By locator, String textoEvidencia) {
-    	//TODO: Implementar logger
-    	try {
-    		GenerarEvidencia.capturarEvidencia(driver, textoEvidencia);
-    		return driver.findElement(locator).isSelected();
-    	} catch (Exception e) {
-    		return false;
-    	}
-    }
-    
-    /**
-     * Prints the object to the console.
-     *
-     * @param obj the object to be printed
-     */
-    public static void printConsole(Object obj) {
-        logger.info(obj);
+    public static void click(By locator, int tiempoEspera, String mensajeEvidencia) {
+        try {
+            WebElement element = findElement(locator, tiempoEspera);
+            element.click();
+            GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
+        } catch (Exception e) {
+            GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
+            log.fatal("No fue posible realizar clic sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
+            throw e;
+        }
     }
 }
