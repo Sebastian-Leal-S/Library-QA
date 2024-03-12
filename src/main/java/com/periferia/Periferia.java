@@ -210,23 +210,23 @@ public class Periferia {
     }
 
 
-    public static String getTitle() {
+    public static String obtenerTitulo() {
         return driver.getTitle();
     }
 
-    public static String getCurrentUrl() {
+    public static String obtenerUrlActual() {
         return driver.getCurrentUrl();
     }
 
-    public static void backPage() {
+    public static void paginaAtras() {
         driver.navigate().back();
     }
 
-    public static void forwardPage() {
+    public static void paginaAdelante() {
         driver.navigate().forward();
     }
 
-    public static void refreshPage() {
+    public static void actualizarPagina() {
         driver.navigate().refresh();
     }
 
