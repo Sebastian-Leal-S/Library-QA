@@ -196,4 +196,7 @@ public class Periferia {
             throw e;
         }
     }
+    public static void printConsole(Object message){
+        System.out.println(message);
+    }
 }

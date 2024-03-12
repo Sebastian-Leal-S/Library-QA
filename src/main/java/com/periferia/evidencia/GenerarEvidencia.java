@@ -1,6 +1,6 @@
 package com.periferia.evidencia;
 
-import com.periferia.Periferia0;
+import com.periferia.Periferia;
 import com.periferia.utilities.CaptureScreen;
 import com.periferia.utilities.GenerarReportePDF;
 import com.periferia.utilities.GenerarReporteVideo;
@@ -32,7 +32,7 @@ public class GenerarEvidencia {
         GestorArchivos.eliminarCarpeta(EVIDENCE_PATH);
         rutaPngEvidencia = GestorArchivos.crearCarpetaEvidencia(EVIDENCE_PATH, nameTest);
         //FIXME: Cambiar a logger
-        Periferia0.printConsole("La evidencia se guardo en: " + rutaPngEvidencia.getPath());
+        Periferia.printConsole("La evidencia se guardo en: " + rutaPngEvidencia.getPath());
 
         GenerarReportePDF.createTemplate(rutaPngEvidencia, nameTest, nameAnalyst, urlPage);
         GenerarReporteVideo.startRecording(rutaPngEvidencia, nameTest);
