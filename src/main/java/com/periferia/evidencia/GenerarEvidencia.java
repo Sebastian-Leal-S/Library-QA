@@ -1,6 +1,6 @@
 package com.periferia.evidencia;
 
-import com.periferia.Periferia;
+import com.periferia.Periferia0;
 import com.periferia.utilities.CaptureScreen;
 import com.periferia.utilities.GenerarReportePDF;
 import com.periferia.utilities.GenerarReporteVideo;
