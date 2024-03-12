@@ -166,6 +166,7 @@ public class Periferia {
         try {
             WebElement element = findElement(locator, tiempoEspera);
             element.click();
+            log.info("Click en el elemento: {}, dentro del tiempo {} seg", locator, tiempoEspera);
         } catch (ElementNotInteractableException e) {
             log.fatal("No fue posible realizar clic sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
             throw e;
@@ -176,6 +177,7 @@ public class Periferia {
             WebElement element = findElement(locator);
             element.click();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
+            log.info("Click en el elemento: {} y correcto guardo de evidencia", locator);
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
             log.fatal("No fue posible realizar clic sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
@@ -187,6 +189,7 @@ public class Periferia {
             WebElement element = findElement(locator, tiempoEspera);
             element.click();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
+            log.info("Click en el elemento: {}, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
             log.fatal("No fue posible realizar clic sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
