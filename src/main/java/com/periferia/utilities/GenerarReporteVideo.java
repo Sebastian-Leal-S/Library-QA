@@ -33,9 +33,9 @@ public class GenerarReporteVideo extends ScreenRecorder {
             throw new IOException("\"" + movieFolder + "\" is not a directory.");
         }
 
-        String horaActual = HoraSistema.currentDate("yyyy-MM-dd_HH-mm-ss");
+        String horaActual = HoraSistema.currentDate("HH-mm-ss");
 
-        return new File(movieFolder, nameFile + "-" + horaActual + "." + Registry.getInstance().getExtension(fileFormat));
+        return new File(movieFolder, nameFile + "_" + horaActual + "." + Registry.getInstance().getExtension(fileFormat));
     }
 
     public static void startRecording(File filePath, String fileName) {
