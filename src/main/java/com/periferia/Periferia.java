@@ -230,6 +230,22 @@ public class Periferia {
         driver.navigate().refresh();
     }
 
+    public static void cambiarFrame(String frameID) {
+        driver.switchTo().frame(frameID);
+    }
+
+    public static void cambiarFrame(int index) {
+        driver.switchTo().frame(index);
+    }
+
+    public static void cambiarFrame(By nombreFrame) {
+        driver.switchTo().frame(Periferia.findElement(nombreFrame));
+    }
+
+    public static void salirFrame() {
+        driver.switchTo().defaultContent();
+    }
+
     public static void printConsole(Object message){
         System.out.println(message);
     }
