@@ -276,6 +276,54 @@ public class Periferia {
         }
     }
 
+    public static void getText(By locator) {
+        try {
+            WebElement element = findElement(locator);
+            element.getText();
+            log.info("Obtener texto sobre el elemento: {}", locator);
+        } catch (Exception e) {
+            log.fatal("No fue posible obtener el texto sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    public static void getText(By locator, int tiempoEspera) {
+        try {
+            WebElement element = findElement(locator, tiempoEspera);
+            element.getText();
+            log.info("Obtener texto sobre el elemento: {}, dentro del tiempo {} seg", locator, tiempoEspera);
+        } catch (Exception e) {
+            log.fatal("No fue posible obtener el texto sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
+            throw e;
+        }
+    }
+
+    public static void getText(By locator, String mensajeEvidencia) {
+        try {
+            WebElement element = findElement(locator);
+            element.getText();
+            GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
+            log.info("Obtener texto sobre el elemento: {} y correcto guardo de evidencia", locator);
+        } catch (Exception e) {
+            GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
+            log.fatal("No fue posible obtener el texto sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    public static void getText(By locator, int tiempoEspera, String mensajeEvidencia) {
+        try {
+            WebElement element = findElement(locator, tiempoEspera);
+            element.getText();
+            GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
+            log.info("Obtener texto sobre el elemento: {}, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
+        } catch (Exception e) {
+            GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
+            log.fatal("No fue posible obtener el texto sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
+            throw e;
+        }
+    }
+
     public static void clear(By locator) {
         try {
             WebElement element = findElement(locator);
