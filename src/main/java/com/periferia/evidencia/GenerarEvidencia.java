@@ -14,10 +14,7 @@ import java.io.File;
  */
 public class GenerarEvidencia {
     private static final String EVIDENCE_PATH = "./outputData/";
-
-    private static File rutaCarpeta;
-
-    //FIXME: Condicional para la generacion de evidencia desde un archivo externo
+    private static File rutaPngEvidencia;
 
     private GenerarEvidencia() {
         throw new IllegalStateException("Utility class");
@@ -42,8 +39,8 @@ public class GenerarEvidencia {
         //FIXME: Cambiar a logger
         Periferia0.printConsole("La evidencia se guardo en: " + rutaPngEvidencia.getPath());
 
-        GenerarReportePDF.createTemplate(rutaCarpeta, nameTest, nameAnalyst, urlPage);
-        GenerarReporteVideo.startRecording(rutaCarpeta, nameTest);
+        GenerarReportePDF.createTemplate(rutaPngEvidencia, nameTest, nameAnalyst, urlPage);
+        GenerarReporteVideo.startRecording(rutaPngEvidencia, nameTest);
 
         //TODO: Implementar logger: Se inicio la creacion de las evidencias
     }
