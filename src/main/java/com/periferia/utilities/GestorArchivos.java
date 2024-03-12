@@ -21,21 +21,12 @@ public class GestorArchivos {
     /**
      * Crea una carpeta en la ruta especificada si la evidencia está habilitada.
      *
-     * @param nameCarpeta          El nombre del test en ejecución.
      * @param rutaEvidencia    La ruta de la carpeta donde se guardarán las capturas
-     *                         de pantalla.
+     * @param nameCarpeta      El nombre del test en ejecución de pantalla.
      * @return El directorio de la carpeta creada.
      */
-    public static File crearCarpeta(String nameCarpeta, String rutaEvidencia) {
-        File directorio = null;
-
-        // ALMACENAMOS LA FECHA DEL SISTEMA
-        String fecha = HoraSistema.currentDate("yyyyMMdd-HHmmss");
-        // CREAMOS EL NOMBRE DE LA CARPETA
-        String nomCarpeta = nameCarpeta + "-" + fecha;
-        // OBTENEMOS LA RETA DE ALOJAMIENTO DE SALIDA Y EL NOMBRE DEL TEST A EJECUTAR
-        directorio = new File(rutaEvidencia + nomCarpeta);
-        // CREAMOS LA CARPETA
+    public static File crearCarpetaEvidencia(String rutaEvidencia, String nameCarpeta) {
+        File directorio = new File(rutaEvidencia + nameCarpeta + "_" + HoraSistema.currentDate("dd-MM-yyyy"));
         directorio.mkdir();
 
         return directorio;
