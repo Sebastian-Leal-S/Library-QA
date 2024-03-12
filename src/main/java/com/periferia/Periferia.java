@@ -10,6 +10,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 /**
  * Librería interna Equipo Automatización para pruebas QA en Periferia IT Group.
  *
@@ -148,6 +150,30 @@ public class Periferia {
         } catch (Exception e) {
             log.fatal("No se encontro el elemento: {}, dentro del tiempo de {} seg. Falla {}", locator, tiempoEspera, e.getMessage());
             throw new NoSuchElementException("EL elemento "+ locator +" no fue encontrado entre del tiempo de espera de " + tiempoEspera + " seg");
+        }
+    }
+
+    public static List<WebElement> findElements(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        try {
+            List<WebElement> elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+            log.debug("Elementos encontrados: {}", locator);
+            return elements;
+        } catch (Exception e) {
+            log.fatal("No se encontraron elementos: {}, dentro del tiempo de 3 seg. Falla {}", locator, e.getMessage());
+            throw new NoSuchElementException("Los elementos no fueron encontrados entre del tiempo de espera de 3 seg: " + locator);
+        }
+    }
+
+    public static List<WebElement> findElements(By locator, int tiempoEspera) {
+        WebDriverWait wait = new WebDriverWait(driver, tiempoEspera);
+        try {
+            List<WebElement> elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+            log.debug("Elementos encontrados: {}", locator);
+            return elements;
+        } catch (Exception e) {
+            log.fatal("No se encontraron elementos: {}, dentro del tiempo de {} seg. Falla {}", locator, tiempoEspera, e.getMessage());
+            throw new NoSuchElementException("Los elementos " + locator + " no fueron encontrados entre del tiempo de espera de " + tiempoEspera + " seg");
         }
     }
 
