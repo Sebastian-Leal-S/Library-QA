@@ -1,0 +1,19 @@
+<configuration status="info">
+    <Properties>
+        <Property name="layout">%d [%t] %-5level %logger - %m%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${layout}"/>
+        </Console>
+        <File name="LogFile" fileName="logs/log.log">
+            <PatternLayout pattern="%d %c{1.} [%t] %m%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="LogFile"/>
+        </Root>
+    </Loggers>
+</configuration>
