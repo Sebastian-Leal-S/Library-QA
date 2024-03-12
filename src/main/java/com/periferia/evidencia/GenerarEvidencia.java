@@ -5,6 +5,7 @@ import com.periferia.utilities.CaptureScreen;
 import com.periferia.utilities.GenerarReportePDF;
 import com.periferia.utilities.GenerarReporteVideo;
 import com.periferia.utilities.GestorArchivos;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;
@@ -18,12 +19,6 @@ public class GenerarEvidencia {
 
     private GenerarEvidencia() {
         throw new IllegalStateException("Utility class");
-    }
-
-    public static void capturarEvidencia(WebDriver driver, String texto) {
-        String rutaImg = CaptureScreen.captureScreen(driver, rutaCarpeta);
-        GenerarReportePDF.createBody(rutaImg, texto);
-        GestorArchivos.eliminarArchivo(rutaImg);
     }
 
     /**
@@ -50,5 +45,17 @@ public class GenerarEvidencia {
         GenerarReporteVideo.stopRecording();
 
         //TODO: Implementar logger: Se finalizo la creacion de las evidencias
+    }
+
+    public static void capturarEvidencia(WebDriver driver, String mensajeEvidencia) {
+        String rutaImg = CaptureScreen.captureScreen(driver, rutaPngEvidencia);
+        GenerarReportePDF.createBody(rutaImg, mensajeEvidencia);
+        GestorArchivos.eliminarArchivo(rutaImg);
+    }
+
+    public static void capturarEvidencia(WebDriver driver, String mensajeError, By locator) {
+        String rutaImg = CaptureScreen.captureScreen(driver, rutaPngEvidencia);
+        GenerarReportePDF.createErrorBody(rutaImg, mensajeError, locator);
+        GestorArchivos.eliminarArchivo(rutaImg);
     }
 }
