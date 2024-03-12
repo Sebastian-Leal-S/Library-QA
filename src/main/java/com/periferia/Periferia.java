@@ -20,6 +20,7 @@ import java.util.List;
 public class Periferia {
 
     protected static SelfHealingDriver driver;
+    protected static final int TIMEOUT = 3;
     protected static Logger log = LogManager.getLogger(Periferia.class);
 
     private Periferia() {
@@ -107,7 +108,6 @@ public class Periferia {
         return driver;
     }
 
-    // Tear down
     /**
      * Cierra el controlador de Selenium si está inicializado.
      */
@@ -131,7 +131,7 @@ public class Periferia {
 
     // Find element
     public static WebElement findElement(By locator) {
-        WebDriverWait wait = new WebDriverWait(driver, 3);
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         try {
             WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
             log.debug("Elemento encontrado: {}", locator);
@@ -155,7 +155,7 @@ public class Periferia {
     }
 
     public static List<WebElement> findElements(By locator) {
-        WebDriverWait wait = new WebDriverWait(driver, 3);
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         try {
             List<WebElement> elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
             log.debug("Elementos encontrados: {}", locator);
