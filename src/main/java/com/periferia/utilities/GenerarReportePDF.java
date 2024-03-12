@@ -17,6 +17,7 @@ public class GenerarReportePDF {
     private static final String MARCA_DE_AGUA_PNG = "./imagenes/marcaDeAgua.png";
     private static final String LOGO_PNG = "./imagenes/logo.png";
     private static final Document documento = new Document();
+    private static boolean documentoCreado = false;
     private static int imgContador = 0;
 
     private static final Font FONT_HEADER = FontFactory.getFont("ITALIC", 12, BaseColor.GRAY);
@@ -81,143 +82,103 @@ public class GenerarReportePDF {
             documento.add(urlApp);
             documento.add(parrafoHoraInicio);
 
+            documentoCreado = true;
         } catch (DocumentException | IOException e) {
             e.printStackTrace();
         }
     }
 
     public static void createBody(String rutaImagen, String mensaje) {
-        Paragraph parrafo = new Paragraph();
-        parrafo.setAlignment(Element.ALIGN_LEFT);
-        parrafo.setFont(FONT_MAIN);
-        parrafo.add("\n\nAccion: " + mensaje + "\n");
+        if (!documentoCreado) {
+            return;
+        }
 
         try {
+            Paragraph parrafo = new Paragraph();
+            parrafo.setAlignment(Element.ALIGN_LEFT);
+            parrafo.setFont(FONT_MAIN);
+            parrafo.add("\n\nAccion: " + mensaje + "\n");
             documento.add(parrafo);
-        } catch (DocumentException e) {
-            System.out.println("Falla al añadir el parrafo al pdf\n" + e);
-        }
 
-        Image imagen = null;
-        try {
-            imagen = Image.getInstance(rutaImagen);
-        } catch (BadElementException e) {
-            System.err.println("Algo fallo no fue posible obtener la imagen de la evidecia\n" + e);
-        } catch (IOException e) {
-            System.err.println("Algo fallo al momento de obtener la captura de pantalla\n" + e);
-        }
-
-        imagen.scalePercent(26, 26);
-        imagen.setAlignment(Element.ALIGN_CENTER);
-        imagen.setBorder(Rectangle.BOX);
-        imagen.setBorderWidth(3);
-        imagen.setBorderColor(BaseColor.BLACK);
-
-        try {
+            Image imagen = Image.getInstance(rutaImagen);
+            imagen.scalePercent(26, 26);
+            imagen.setAlignment(Element.ALIGN_CENTER);
+            imagen.setBorder(Rectangle.BOX);
+            imagen.setBorderWidth(3);
+            imagen.setBorderColor(BaseColor.BLACK);
             documento.add(imagen);
-        } catch (DocumentException e) {
-            System.err.println("Algo fallo al momento de adjuntar la captura de pantalla al pdf\n" + e);
-        }
-
-        imgContador = imgContador + 1;
-        if (imgContador == 2) {
-            documento.newPage();
-            imgContador = 0;
+            imgContador = imgContador + 1;
+            if (imgContador == 2) {
+                documento.newPage();
+                imgContador = 0;
+            }
+        }catch (DocumentException e) {
+            System.err.println("Falla al añadir el parrafo al pdf\n" + e);
+        }catch (IOException e) {
+            System.err.println("Algo fallo no fue posible obtener la imagen de la evidecia\n" + e);
         }
     }
 
-    public static void createErrorBody(By locator, String rutaImagen, String errorMessage)
-            throws DocumentException, IOException {
-
-        //TODO: Comprobrar la reducdacia de este parrafo
-        Paragraph localizador = new Paragraph();
-        localizador.setAlignment(Element.ALIGN_LEFT);
-        localizador.setFont(FONT_MAIN);
-        localizador.add("Acción: " + locator);
-        documento.add(localizador);
-
-        Image imagen = Image.getInstance(rutaImagen);
-        imagen.scalePercent(25, 35);
-        imagen.scaleToFit(500, 500);
-        imagen.setAlignment(Element.ALIGN_CENTER);
-
-        documento.add(imagen);
-        imgContador = imgContador + 1;
-
-        if (imgContador == 2) {
-            documento.newPage();
-            imgContador = 0;
+    public static void createErrorBody(String rutaImagen, String errorMessage, By locator) {
+        if (!documentoCreado) {
+            return;
         }
 
-        Paragraph elementoError = new Paragraph();
-        elementoError.setAlignment(Element.ALIGN_LEFT);
-        elementoError.setFont(FONT_ERROR);
-        elementoError.add("\nFallo al momento de interactuar con: " + locator + "/n");
+        try {
+            //TODO: Comprobrar la redundancia de este parrafo
+            Paragraph localizador = new Paragraph();
+            localizador.setAlignment(Element.ALIGN_LEFT);
+            localizador.setFont(FONT_MAIN);
+            localizador.add("Acción: " + locator);
+            documento.add(localizador);
+            Image imagen = null;
+            imagen = Image.getInstance(rutaImagen);
+            imagen.scalePercent(25, 35);
+            imagen.scaleToFit(500, 500);
+            imagen.setAlignment(Element.ALIGN_CENTER);
+            documento.add(imagen);
+            imgContador = imgContador + 1;
+            if (imgContador == 2) {
+                documento.newPage();
+                imgContador = 0;
+            }
+            Paragraph elementoError = new Paragraph();
+            elementoError.setAlignment(Element.ALIGN_LEFT);
+            elementoError.setFont(FONT_ERROR);
+            elementoError.add("\nFallo al momento de interactuar con: " + locator + "/n");
 
-        Paragraph parrafoError = new Paragraph();
-        parrafoError.setAlignment(Element.ALIGN_LEFT);
-        parrafoError.setFont(FONT_ERROR);
-        parrafoError.add("\nMensaje de la accion fallida: " + errorMessage + "/n");
-
-        documento.add(elementoError);
-        documento.add(parrafoError);
-        documento.close();
+            Paragraph parrafoError = new Paragraph();
+            parrafoError.setAlignment(Element.ALIGN_LEFT);
+            parrafoError.setFont(FONT_ERROR);
+            parrafoError.add("\nMensaje de la accion fallida: " + errorMessage + "/n");
+            documento.add(elementoError);
+            documento.add(parrafoError);
+            documento.close();
+        }catch (DocumentException e) {
+            System.err.println("Falla al añadir el parrafo al pdf\n" + e);
+        }catch (IOException e) {
+            System.err.println("Algo fallo no fue posible obtener la imagen de la evidecia\n" + e);
+        }
     }
 
     public static void closeTemplate() {
-        Paragraph parrafo = new Paragraph();
-        parrafo.setAlignment(Element.ALIGN_RIGHT);
-        parrafo.setFont(FONT_MAIN);
-        parrafo.add("Hora de Finalización: " + HoraSistema.currentDate(FORMATO_FECHA) + "\n");
-        parrafo.add("Tiempo de Ejecución: " + TiempoEjecucion.getRunTime() + "\n");
-
         try {
-            documento.add(Chunk.NEWLINE);
-            documento.add(parrafo);
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        }
-
-        documento.close();
-    }
-
-    public static void closeTemplate(String error, String generarEvidencia) {
-        if (generarEvidencia.equals("SI")) {
-
             Paragraph parrafo = new Paragraph();
             parrafo.setAlignment(Element.ALIGN_RIGHT);
             parrafo.setFont(FONT_MAIN);
-            parrafo.add("Hora de Finalizacion: " + HoraSistema.currentDate(FORMATO_FECHA) + "\n");
-            parrafo.add("Tiempo de Ejecucion: " + TiempoEjecucion.getRunTime() + "\n");
-
-            try {
-                documento.add(Chunk.NEWLINE);
-                documento.add(parrafo);
-            } catch (DocumentException e) {
-                e.printStackTrace();
-            }
-
-            if (!error.isEmpty()) {
-                try {
-                    documento.add(new Paragraph(error, FONT_ERROR));
-                } catch (DocumentException e) {
-                    e.printStackTrace();
-                }
-
-                Paragraph estate = new Paragraph("\n\nEstado: Fallido", FONT_ERROR);
-                estate.setAlignment(1);
-
-                try {
-                    documento.add(estate);
-                } catch (DocumentException e) {
-                    e.printStackTrace();
-                }
-            }
+            parrafo.add("Hora de Finalización: " + HoraSistema.currentDate(FORMATO_FECHA) + "\n");
+            parrafo.add("Tiempo de Ejecución: " + TiempoEjecucion.getRunTime() + "\n");
+            documento.add(Chunk.NEWLINE);
+            documento.add(parrafo);
             documento.close();
+
+            documentoCreado = false;
+        } catch (DocumentException e) {
+            e.printStackTrace();
         }
     }
 
-    public static class Footer extends PdfPageEventHelper {
+    private static class Footer extends PdfPageEventHelper {
         @Override
         public void onEndPage(PdfWriter writer, Document document) {
             float pageWidthHalf = (document.getPageSize().getLeft() + document.getPageSize().getRight()) / 2;
