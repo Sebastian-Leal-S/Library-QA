@@ -3,6 +3,7 @@ package pagesObjects;
 import com.epam.healenium.SelfHealingDriver;
 import com.periferia.Periferia;
 import mapsObjects.TestMap;
+import org.openqa.selenium.By;
 
 public class TestPage extends TestMap {
 
@@ -10,19 +11,51 @@ public class TestPage extends TestMap {
         super(driver);
     }
 
-    public void loginWithEvidence(String user, String password) {
-    	Periferia.sendkey(inputUser, user, "Ingreso usuario");
-        Periferia.sendkey(inputPassword, password, "Ingreso contraseña");
+    public void clickTest() {
+        By buttonTest = By.xpath("//button[@id='button-test']");
 
-        Periferia.isDisplayed(btnLogin);
-        
-        Periferia.click(btnLogin, "Clic boton login");
+        Periferia.click(buttonTest);
+
+        Periferia.click(buttonTest, 5);
+
+        Periferia.click(buttonTest, "Click en el boton test.");
+
+        Periferia.click(buttonTest, 5, "Click en el boton test, dentro del tiempo de espera proporcionado.");
     }
 
-    public void loginWithoutEvidence(String user, String password){
-        Periferia.sendkey(inputUser, user);
-        Periferia.sendkey(inputPassword, password);
+    public void sendKeyTest() {
+        By inputTest = By.xpath("//input[@id='input-test']");
 
-        Periferia.click(btnLogin);
+        Periferia.sendKeys(inputTest, "Texto a enviar");
+
+        Periferia.sendKeys(inputTest, "Texto a enviar", 5);
+
+        Periferia.sendKeys(inputTest, "Texto a enviar", "Envio de texto");
+
+        Periferia.sendKeys(inputTest, "Texto a enviar", 5, "Envio de texto");
+    }
+
+    public void getTextTest() {
+        By textTest = By.xpath("//p[@id='text-test']");
+
+        Periferia.getText(textTest);
+
+        Periferia.getText(textTest, 5);
+
+        Periferia.getText(textTest, "Obtener texto");
+
+        Periferia.getText(textTest, 5, "Obtener texto");
+    }
+
+    public void clearTest() {
+        By inputTest = By.xpath("//input[@id='input-test']");
+
+        Periferia.clear(inputTest);
+
+        Periferia.clear(inputTest, 5);
+
+        Periferia.clear(inputTest, "Limpiar campo");
+
+        Periferia.clear(inputTest, 5, "Limpiar campo");
     }
 }

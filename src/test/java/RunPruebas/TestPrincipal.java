@@ -8,13 +8,19 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import pagesObjects.TestPage;
 
 public class TestPrincipal {
 
     static SelfHealingDriver driver;
     static TestPage testPage;
+
+    static String url;
+    static String nombreAnalista;
 
     @DataProvider(name = "dpGeneral")
     public Object[][] dpGeneral() {
@@ -27,6 +33,8 @@ public class TestPrincipal {
         // Configurar propiedades
             // Leer propiedades
             // Cargar propiedades
+        url = "D:\\Test-Page\\index.html";
+        nombreAnalista = "Nombre Analista";
 
         // Instaciación de las pageObj
         testPage = new TestPage(driver);
@@ -35,38 +43,25 @@ public class TestPrincipal {
     @Test
     @Severity(SeverityLevel.NORMAL)
 	@Story("Pruebas library-QA")
-	@Description("Test para probar Libreria-QA con evidencia")
-    public void testWithEvidence() {
+    @Description("Test para probar Libreria-QA")
+    public void testMethods() {
         String nameTest = Thread.currentThread().getStackTrace()[1].getMethodName();
 
-        driver = Periferia.setUp(Navegador.CHROME, "https://demoqa.com/login");
+        driver = Periferia.setUp(Navegador.CHROME, url);
 
-        GenerarEvidencia.iniciarEvidencia(nameTest, "Nombre Analista", "Url page");
+        GenerarEvidencia.iniciarEvidencia(nameTest, nombreAnalista, url);
 
-        testPage.loginWithEvidence("User", "Password");
-
-        GenerarEvidencia.finalizarEvidencia();
-    }
-
-    @Test
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Pruebas library-QA")
-    @Description("test para probar la nueva libreria QA sin evidencia")
-    public void testWithoutEvidence() {
-        String nameTest = Thread.currentThread().getStackTrace()[1].getMethodName();
-
-        driver = Periferia.setUp(Navegador.CHROME, "https://demoqa.com/login");
-
-        GenerarEvidencia.iniciarEvidencia(nameTest, "Nombre Analista", "Url Page");
-
-        testPage.loginWithoutEvidence("User", "Password");
+        testPage.clickTest();
+        testPage.sendKeyTest();
+        testPage.clearTest();
+        testPage.getTextTest();
 
         GenerarEvidencia.finalizarEvidencia();
     }
 
     @AfterTest
     public void afterTest() {
-        Periferia.closeDriver();
+        Periferia.tearDown();
     }
 
 }
