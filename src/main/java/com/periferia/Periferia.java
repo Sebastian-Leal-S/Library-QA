@@ -141,6 +141,7 @@ public class Periferia {
             throw new NoSuchElementException("EL elemento no fue encontrado entre del tiempo de espera de 3 seg: " + locator);
         }
     }
+
     public static WebElement findElement(By locator, int tiempoEspera) {
         WebDriverWait wait = new WebDriverWait(driver, tiempoEspera);
         try {
@@ -188,6 +189,7 @@ public class Periferia {
             throw e;
         }
     }
+
     public static void click(By locator, int tiempoEspera) {
         try {
             WebElement element = findElement(locator, tiempoEspera);
@@ -198,6 +200,7 @@ public class Periferia {
             throw e;
         }
     }
+
     public static void click(By locator, String mensajeEvidencia) {
         try {
             WebElement element = findElement(locator);
@@ -210,6 +213,7 @@ public class Periferia {
             throw e;
         }
     }
+
     public static void click(By locator, int tiempoEspera, String mensajeEvidencia) {
         try {
             WebElement element = findElement(locator, tiempoEspera);
@@ -235,6 +239,42 @@ public class Periferia {
         }
     }
 
+    public static void sendKeys(By locator, String texto, int tiempoEspera) {
+        try {
+            WebElement element = findElement(locator, tiempoEspera);
+            element.sendKeys(texto);
+            log.info("Envio de texto '{}' sobre el elemento: {}, dentro del tiempo {} seg", texto, locator, tiempoEspera);
+        } catch (Exception e) {
+            log.fatal("No fue posible realizar el envio de texto sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
+            throw e;
+        }
+    }
+
+    public static void sendKeys(By locator, String texto, String mensajeEvidencia) {
+        try {
+            WebElement element = findElement(locator);
+            element.sendKeys(texto);
+            GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
+            log.info("Envio de texto '{}' sobre el elemento: {} y correcto guardo de evidencia", texto, locator);
+        } catch (Exception e) {
+            GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
+            log.fatal("No fue posible realizar el envio de texto sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    public static void sendKeys(By locator, String texto, int tiempoEspera, String mensajeEvidencia) {
+        try {
+            WebElement element = findElement(locator, tiempoEspera);
+            element.sendKeys(texto);
+            GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
+            log.info("Envio de texto '{}' sobre el elemento: {}, dentro del tiempo {} seg y correcto guardo de evidencia", texto, locator, tiempoEspera);
+        } catch (Exception e) {
+            GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
+            log.fatal("No fue posible realizar el envio de texto sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
+            throw e;
+        }
+    }
 
     public static String obtenerTitulo() {
         return driver.getTitle();
