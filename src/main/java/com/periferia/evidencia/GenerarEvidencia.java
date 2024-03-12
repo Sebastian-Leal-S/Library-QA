@@ -38,8 +38,9 @@ public class GenerarEvidencia {
      */
     public static void iniciarEvidencia(String nameTest, String nameAnalyst, String urlPage) {
         GestorArchivos.eliminarCarpeta(EVIDENCE_PATH);
-        rutaCarpeta = GestorArchivos.crearCarpeta(nameTest, EVIDENCE_PATH);
-        Periferia.printConsole("La evidencia se guardo en: " + rutaCarpeta.getPath());
+        rutaPngEvidencia = GestorArchivos.crearCarpetaEvidencia(EVIDENCE_PATH, nameTest);
+        //FIXME: Cambiar a logger
+        Periferia0.printConsole("La evidencia se guardo en: " + rutaPngEvidencia.getPath());
 
         GenerarReportePDF.createTemplate(rutaCarpeta, nameTest, nameAnalyst, urlPage);
         GenerarReporteVideo.startRecording(rutaCarpeta, nameTest);
