@@ -27,6 +27,7 @@ public class GenerarReportePDF {
     private static final String FORMATO_FECHA = "HH:mm:ss";
 
     private GenerarReportePDF() {
+        throw new IllegalStateException("Utility class");
     }
 
     public static void createTemplate(File filePath, String nameTest, String nameAnalyst, String url) {
