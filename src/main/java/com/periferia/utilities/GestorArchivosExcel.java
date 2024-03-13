@@ -1,12 +1,11 @@
 package com.periferia.utilities;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class GestorArchivosExcel {
 
@@ -14,8 +13,7 @@ public class GestorArchivosExcel {
     private static XSSFWorkbook excelWBook;
     private static XSSFCell cell;
 
-
-    public static String getCellData(int rowNum, int colNum) {
+    private static String getCellData(int rowNum, int colNum) {
         cell = excelWSheet.getRow(rowNum).getCell(colNum);
         String CellData = "";
         if (cell.getCellType() == null) {
@@ -52,9 +50,6 @@ public class GestorArchivosExcel {
                     tabArray[ci][cj] = getCellData(i, j);
                 }
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("Could not read the excel sheet");
-            e.printStackTrace();
         } catch (IOException e) {
             System.out.println("Could not read the excel sheet");
             e.printStackTrace();
