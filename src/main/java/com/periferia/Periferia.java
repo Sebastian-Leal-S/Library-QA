@@ -680,6 +680,10 @@ public class Periferia {
         }
     }
 
+    public static void capturarEvidencia(String mensaje) {
+        GenerarEvidencia.capturarEvidencia(driver, mensaje);
+    }
+    
     /**
      * Imprime un mensaje en la consola utilizando el nivel de registro de información.
      *
