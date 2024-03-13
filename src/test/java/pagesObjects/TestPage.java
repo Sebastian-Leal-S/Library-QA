@@ -4,6 +4,7 @@ import com.epam.healenium.SelfHealingDriver;
 import com.periferia.Periferia;
 import mapsObjects.TestMap;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 
 public class TestPage extends TestMap {
 
@@ -12,7 +13,7 @@ public class TestPage extends TestMap {
     }
 
     public void clickTest() {
-        By buttonTest = By.xpath("//button[@id='button-test']");
+        By buttonTest = By.xpath("//button[@id='button-change-color']");
 
         Periferia.click(buttonTest);
 
@@ -24,7 +25,7 @@ public class TestPage extends TestMap {
     }
 
     public void sendKeyTest() {
-        By inputTest = By.xpath("//input[@id='input-test']");
+        By inputTest = By.xpath("//input[@id='input-text']");
 
         Periferia.sendKeys(inputTest, "Texto a enviar");
 
@@ -36,7 +37,7 @@ public class TestPage extends TestMap {
     }
 
     public void getTextTest() {
-        By textTest = By.xpath("//p[@id='text-test']");
+        By textTest = By.xpath("//p[@id='text-visible']");
 
         String texto = Periferia.getText(textTest);
         Periferia.printConsole(texto);
@@ -52,7 +53,7 @@ public class TestPage extends TestMap {
     }
 
     public void clearTest() {
-        By inputTest = By.xpath("//input[@id='input-test']");
+        By inputTest = By.xpath("//input[@id='input-text']");
 
         Periferia.clear(inputTest);
 
@@ -61,5 +62,23 @@ public class TestPage extends TestMap {
         Periferia.clear(inputTest, "Limpiar campo");
 
         Periferia.clear(inputTest, 5, "Limpiar campo");
+    }
+
+    public void completeTest() {
+        By buttonColor = By.xpath("//button[@id='button-change-color']");
+        By textTest = By.xpath("//p[@id='text-visible']");
+        By inputTest = By.xpath("//input[@id='input-text']");
+        By buttonText = By.xpath("//button[@id='button-change-text']");
+
+        Periferia.click(buttonColor, "Clic para cambiar color");
+        Periferia.sendKeys(inputTest, "Hello", "Envio de texto");
+        Periferia.click(buttonText);
+
+        Assert.assertEquals("Hello", Periferia.getText(textTest));
+        Periferia.clear(inputTest);
+
+        Periferia.sendKeys(inputTest, "Como estan?");
+        Periferia.click(buttonColor);
+        Periferia.click(buttonColor, "Esto es para la evidencia");
     }
 }
