@@ -27,12 +27,15 @@ public class Periferia {
         throw new IllegalStateException("Utility class");
     }
 
-    // getDriver
+    /**
+     * Obtiene el controlador de Selenium.
+     *
+     * @return El controlador de Selenium.
+     */
     public static SelfHealingDriver getDriver() {
         return driver;
     }
 
-    // Set up
     /**
      * Configura y inicializa el controlador de Selenium.
      *
@@ -52,6 +55,14 @@ public class Periferia {
         return driver;
     }
 
+    /**
+     * Configura y inicializa el controlador de Selenium con el navegador especificado y navega a la URL proporcionada.
+     *
+     * @param navegador El navegador que se utilizará para la prueba.
+     * @param url       La URL a la que se desea navegar.
+     * @return El controlador de Selenium configurado y listo para usar.
+     * @throws WebDriverException Si ocurre un error al inicializar el controlador de Selenium.
+     */
     public static SelfHealingDriver setUp(Navegador navegador, String url) {
         try {
             log.info("Inicializando el driver... con el navegador {}", navegador);
@@ -90,6 +101,15 @@ public class Periferia {
         return driver;
     }
 
+    /**
+     * Configura y inicializa el controlador de Selenium con el navegador especificado y navega a la URL proporcionada.
+     *
+     * @param navegador El nombre del navegador que se utilizará para la prueba (por ejemplo, "CHROME", "FIREFOX" o "EDGE").
+     * @param url La URL a la que se desea navegar.
+     * @return El controlador de Selenium configurado y listo para usar.
+     * @throws IllegalArgumentException Si el nombre del navegador no es válido.
+     * @throws WebDriverException Si ocurre un error al inicializar el controlador de Selenium.
+     */
     public static SelfHealingDriver setUp(String navegador, String url) {
         try {
             Navegador navegadorEmun = Navegador.valueOf(navegador.toUpperCase());
@@ -118,7 +138,12 @@ public class Periferia {
         }
     }
 
-    // Go url
+    /**
+     * Navega a la URL proporcionada.
+     *
+     * @param url La URL a la que se desea navegar.
+     * @throws WebDriverException Si ocurre un error al navegar a la URL.
+     */
     public static void goUrl(String url) {
         try {
             driver.get(url);
@@ -129,7 +154,14 @@ public class Periferia {
         }
     }
 
-    // Find element
+
+    /**
+     * Encuentra un elemento web utilizando el localizador proporcionado.
+     *
+     * @param locator El localizador utilizado para encontrar el elemento web.
+     * @return El elemento web encontrado.
+     * @throws NoSuchElementException Si el elemento web no se encuentra en el tiempo de espera de 3 segundos.
+     */
     public static WebElement findElement(By locator) {
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         try {
@@ -142,6 +174,14 @@ public class Periferia {
         }
     }
 
+    /**
+     * Encuentra un elemento web utilizando el localizador proporcionado.
+     *
+     * @param locator El localizador utilizado para encontrar el elemento web.
+     * @param tiempoEspera El tiempo de espera en segundos para encontrar el elemento web.
+     * @return El elemento web encontrado.
+     * @throws NoSuchElementException Si el elemento web no se encuentra en el tiempo de espera proporcionado.
+     */
     public static WebElement findElement(By locator, int tiempoEspera) {
         WebDriverWait wait = new WebDriverWait(driver, tiempoEspera);
         try {
@@ -154,6 +194,13 @@ public class Periferia {
         }
     }
 
+    /**
+     * Encuentra todos los elementos web que coinciden con el localizador proporcionado.
+     *
+     * @param locator El localizador utilizado para encontrar los elementos web.
+     * @return Una lista de elementos web encontrados.
+     * @throws NoSuchElementException Si los elementos web no se encuentran en el tiempo de espera de 3 segundos.
+     */
     public static List<WebElement> findElements(By locator) {
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         try {
@@ -166,6 +213,14 @@ public class Periferia {
         }
     }
 
+    /**
+     * Encuentra todos los elementos web que coinciden con el localizador proporcionado.
+     *
+     * @param locator El localizador utilizado para encontrar los elementos web.
+     * @param tiempoEspera El tiempo de espera en segundos para encontrar los elementos web.
+     * @return Una lista de elementos web encontrados.
+     * @throws NoSuchElementException Si los elementos web no se encuentran en el tiempo de espera proporcionado.
+     */
     public static List<WebElement> findElements(By locator, int tiempoEspera) {
         WebDriverWait wait = new WebDriverWait(driver, tiempoEspera);
         try {
@@ -178,7 +233,12 @@ public class Periferia {
         }
     }
 
-    // Click
+    /**
+     * Realiza clic en el elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator El localizador utilizado para encontrar el elemento web.
+     * @throws ElementNotInteractableException Si el elemento web no es interactuable en el tiempo de espera de 3 segundos.
+     */
     public static void click(By locator) {
         try {
             WebElement element = findElement(locator);
@@ -190,6 +250,13 @@ public class Periferia {
         }
     }
 
+    /**
+     * Realiza clic en el elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator El localizador utilizado para encontrar el elemento web.
+     * @param tiempoEspera El tiempo de espera en segundos para encontrar el elemento web.
+     * @throws ElementNotInteractableException Si el elemento web no es interactuable en el tiempo de espera proporcionado.
+     */
     public static void click(By locator, int tiempoEspera) {
         try {
             WebElement element = findElement(locator, tiempoEspera);
@@ -201,6 +268,13 @@ public class Periferia {
         }
     }
 
+    /**
+     * Realiza clic en el elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator El localizador utilizado para encontrar el elemento web.
+     * @param mensajeEvidencia El mensaje que se desea capturar en la evidencia.
+     * @throws ElementNotInteractableException Si el elemento web no es interactuable en el tiempo de espera de 3 segundos.
+     */
     public static void click(By locator, String mensajeEvidencia) {
         try {
             WebElement element = findElement(locator);
@@ -214,6 +288,14 @@ public class Periferia {
         }
     }
 
+    /**
+     * Realiza clic en el elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator El localizador utilizado para encontrar el elemento web.
+     * @param tiempoEspera El tiempo de espera en segundos para encontrar el elemento web.
+     * @param mensajeEvidencia El mensaje que se desea capturar en la evidencia.
+     * @throws ElementNotInteractableException Si el elemento web no es interactuable en el tiempo de espera proporcionado.
+     */
     public static void click(By locator, int tiempoEspera, String mensajeEvidencia) {
         try {
             WebElement element = findElement(locator, tiempoEspera);
@@ -227,7 +309,13 @@ public class Periferia {
         }
     }
 
-    // Send keys
+    /**
+     * Envía texto al elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator El localizador utilizado para encontrar el elemento web.
+     * @param texto El texto que se desea enviar al elemento web.
+     * @throws ElementNotInteractableException Si el elemento web no es interactuable en el tiempo de espera de 3 segundos.
+     */
     public static void sendKeys(By locator, String texto) {
         try {
             WebElement element = findElement(locator);
@@ -239,6 +327,14 @@ public class Periferia {
         }
     }
 
+    /**
+     * Envía texto al elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator El localizador utilizado para encontrar el elemento web.
+     * @param texto El texto que se desea enviar al elemento web.
+     * @param tiempoEspera El tiempo de espera en segundos para encontrar el elemento web.
+     * @throws ElementNotInteractableException Si el elemento web no es interactuable en el tiempo de espera proporcionado.
+     */
     public static void sendKeys(By locator, String texto, int tiempoEspera) {
         try {
             WebElement element = findElement(locator, tiempoEspera);
@@ -250,6 +346,14 @@ public class Periferia {
         }
     }
 
+    /**
+     * Envía texto al elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator El localizador utilizado para encontrar el elemento web.
+     * @param texto El texto que se desea enviar al elemento web.
+     * @param mensajeEvidencia El mensaje que se desea capturar en la evidencia.
+     * @throws ElementNotInteractableException Si el elemento web no es interactuable en el tiempo de espera de 3 segundos.
+     */
     public static void sendKeys(By locator, String texto, String mensajeEvidencia) {
         try {
             WebElement element = findElement(locator);
@@ -263,6 +367,15 @@ public class Periferia {
         }
     }
 
+    /**
+     * Envía texto al elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator El localizador utilizado para encontrar el elemento web.
+     * @param texto El texto que se desea enviar al elemento web.
+     * @param tiempoEspera El tiempo de espera en segundos para encontrar el elemento web.
+     * @param mensajeEvidencia El mensaje que se desea capturar en la evidencia.
+     * @throws ElementNotInteractableException Si el elemento web no es interactuable en el tiempo de espera proporcionado.
+     */
     public static void sendKeys(By locator, String texto, int tiempoEspera, String mensajeEvidencia) {
         try {
             WebElement element = findElement(locator, tiempoEspera);
@@ -276,34 +389,60 @@ public class Periferia {
         }
     }
 
-    public static void getText(By locator) {
+    /**
+     * Obtiene el texto del elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator El localizador utilizado para encontrar el elemento web.
+     * @return El texto del elemento web.
+     * @throws NoSuchElementException Si el texto del elemento web no se encuentra en el tiempo de espera de 3 segundos.
+     */
+    public static String getText(By locator) {
         try {
             WebElement element = findElement(locator);
-            element.getText();
-            log.info("Obtener texto sobre el elemento: {}", locator);
+            String text = element.getText();
+            log.info("Se obtuvo el texto '{}' sobre el elemento: {}", text, locator);
+            return text;
         } catch (Exception e) {
             log.fatal("No fue posible obtener el texto sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
             throw e;
         }
     }
 
-    public static void getText(By locator, int tiempoEspera) {
+    /**
+     * Obtiene el texto del elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator      El localizador utilizado para encontrar el elemento web.
+     * @param tiempoEspera El tiempo de espera en segundos para encontrar el elemento web.
+     * @return El texto del elemento web.
+     * @throws NoSuchElementException Si el texto del elemento web no se encuentra en el tiempo de espera proporcionado.
+     */
+    public static String getText(By locator, int tiempoEspera) {
         try {
             WebElement element = findElement(locator, tiempoEspera);
-            element.getText();
-            log.info("Obtener texto sobre el elemento: {}, dentro del tiempo {} seg", locator, tiempoEspera);
+            String text = element.getText();
+            log.info("Se obtuvi texto sobre el elemento: {}, dentro del tiempo {} seg", locator, tiempoEspera);
+            return text;
         } catch (Exception e) {
             log.fatal("No fue posible obtener el texto sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
             throw e;
         }
     }
 
-    public static void getText(By locator, String mensajeEvidencia) {
+    /**
+     * Obtiene el texto del elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator          El localizador utilizado para encontrar el elemento web.
+     * @param mensajeEvidencia El mensaje que se desea capturar en la evidencia.
+     * @return El texto del elemento web.
+     * @throws NoSuchElementException Si el texto del elemento web no se encuentra en el tiempo de espera de 3 segundos.
+     */
+    public static String getText(By locator, String mensajeEvidencia) {
         try {
             WebElement element = findElement(locator);
-            element.getText();
+            String text = element.getText();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
             log.info("Obtener texto sobre el elemento: {} y correcto guardo de evidencia", locator);
+            return text;
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
             log.fatal("No fue posible obtener el texto sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
@@ -311,12 +450,22 @@ public class Periferia {
         }
     }
 
-    public static void getText(By locator, int tiempoEspera, String mensajeEvidencia) {
+    /**
+     * Obtiene el texto del elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator          El localizador utilizado para encontrar el elemento web.
+     * @param tiempoEspera     El tiempo de espera en segundos para encontrar el elemento web.
+     * @param mensajeEvidencia El mensaje que se desea capturar en la evidencia.
+     * @return El texto del elemento web.
+     * @throws NoSuchElementException Si el texto del elemento web no se encuentra en el tiempo de espera proporcionado.
+     */
+    public static String getText(By locator, int tiempoEspera, String mensajeEvidencia) {
         try {
             WebElement element = findElement(locator, tiempoEspera);
-            element.getText();
+            String text = element.getText();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
             log.info("Obtener texto sobre el elemento: {}, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
+            return text;
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
             log.fatal("No fue posible obtener el texto sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
@@ -324,6 +473,12 @@ public class Periferia {
         }
     }
 
+    /**
+     * Limpia el contenido del campo identificado por el locator especificado.
+     *
+     * @param locator El locator del elemento cuyo campo se desea limpiar.
+     * @throws Exception Si no es posible limpiar el campo del elemento.
+     */
     public static void clear(By locator) {
         try {
             WebElement element = findElement(locator);
@@ -335,6 +490,13 @@ public class Periferia {
         }
     }
 
+    /**
+     * Limpia el contenido del campo identificado por el locator especificado.
+     *
+     * @param locator El locator del elemento cuyo campo se desea limpiar.
+     * @param tiempoEspera El tiempo de espera en segundos para encontrar el elemento web.
+     * @throws Exception Si no es posible limpiar el campo del elemento.
+     */
     public static void clear(By locator, int tiempoEspera) {
         try {
             WebElement element = findElement(locator, tiempoEspera);
@@ -346,6 +508,13 @@ public class Periferia {
         }
     }
 
+    /**
+     * Limpia el contenido del campo identificado por el locator especificado.
+     *
+     * @param locator El locator del elemento cuyo campo se desea limpiar.
+     * @param mensajeEvidencia El mensaje que se desea capturar en la evidencia.
+     * @throws Exception Si no es posible limpiar el campo del elemento.
+     */
     public static void clear(By locator, String mensajeEvidencia) {
         try {
             WebElement element = findElement(locator);
@@ -359,6 +528,14 @@ public class Periferia {
         }
     }
 
+    /**
+     * Limpia el contenido del campo identificado por el locator especificado.
+     *
+     * @param locator El locator del elemento cuyo campo se desea limpiar.
+     * @param tiempoEspera El tiempo de espera en segundos para encontrar el elemento web.
+     * @param mensajeEvidencia El mensaje que se desea capturar en la evidencia.
+     * @throws Exception Si no es posible limpiar el campo del elemento.
+     */
     public static void clear(By locator, int tiempoEspera, String mensajeEvidencia) {
         try {
             WebElement element = findElement(locator, tiempoEspera);
