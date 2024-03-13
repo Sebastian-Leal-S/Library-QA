@@ -42,6 +42,9 @@ public class GenerarEvidencia {
         log.info("Se inicio la creacion de las evidencias");
     }
 
+    /**
+     * Metodo para finalizar la generacion de evidencias se cierra el reporte en pdf y el video de la ejecucion.
+     */
     public static void finalizarEvidencia() {
         GenerarReportePDF.closeTemplate();
         GenerarReporteVideo.stopRecording();
@@ -49,12 +52,25 @@ public class GenerarEvidencia {
         log.info("Se finalizo la creacion de las evidencias");
     }
 
+    /**
+     * Metodo para capturar evidencia en el reporte en pdf
+     *
+     * @param driver           WebDriver para tomar captura de pantalla
+     * @param mensajeEvidencia Mensaje que se mostrara en el reporte
+     */
     public static void capturarEvidencia(WebDriver driver, String mensajeEvidencia) {
         String rutaImg = CaptureScreen.captureScreen(driver, rutaPngEvidencia);
         GenerarReportePDF.createBody(rutaImg, mensajeEvidencia);
         GestorArchivos.eliminarArchivo(rutaImg);
     }
 
+    /**
+     * Metodo para capturar evidencia en el reporte en pdf
+     *
+     * @param driver WebDriver para tomar captura de pantalla
+     * @param mensajeError Mensaje que se mostrara en el reporte
+     * @param locator Localizador del elemento que genero el error
+     */
     public static void capturarEvidencia(WebDriver driver, String mensajeError, By locator) {
         String rutaImg = CaptureScreen.captureScreen(driver, rutaPngEvidencia);
         GenerarReportePDF.createErrorBody(rutaImg, mensajeError, locator);
