@@ -550,6 +550,270 @@ public class Periferia {
     }
 
     /**
+     * Método para verificar si un elemento está siendo <b>mostrado</b> en la interfaz de usuario.
+     *
+     * @param locator el localizador del elemento
+     * @return true si el elemento está siendo mostrado, false de lo contrario
+     * @throws RuntimeException si el elemento no puede ser encontrado o si ocurre un error al intentar determinar su visibilidad
+     */
+    public static boolean isDisplayed(By locator) {
+        try {
+            WebElement element = findElement(locator);
+            boolean isDisplayed = element.isDisplayed();
+            log.info("El elemento: {} se encuentra visible", locator);
+            return isDisplayed;
+        } catch (Exception e) {
+            log.fatal("El elemento: {} no se encuentra visible, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Método para verificar si un elemento está siendo <b>mostrado</b> en la interfaz de usuario.
+     *
+     * @param locator      el localizador del elemento
+     * @param tiempoEspera el tiempo de espera en segundos para encontrar el elemento web
+     * @return true si el elemento está siendo mostrado, false de lo contrario
+     * @throws RuntimeException si el elemento no puede ser encontrado o si ocurre un error al intentar determinar su visibilidad
+     */
+    public static boolean isDisplayed(By locator, int tiempoEspera) {
+        try {
+            WebElement element = findElement(locator, tiempoEspera);
+            boolean isDisplayed = element.isDisplayed();
+            log.info("El elemento: {} se encuentra visible", locator);
+            return isDisplayed;
+        } catch (Exception e) {
+            log.fatal("El elemento: {} no se encuentra visible, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Método para verificar si un elemento está siendo <b>mostrado</b> en la interfaz de usuario.
+     *
+     * @param locator          el localizador del elemento
+     * @param mensajeEvidencia el mensaje que se desea capturar en la evidencia
+     * @return true si el elemento está siendo mostrado, false de lo contrario
+     * @throws RuntimeException si el elemento no puede ser encontrado o si ocurre un error al intentar determinar su visibilidad
+     */
+    public static boolean isDisplayed(By locator, String mensajeEvidencia) {
+        try {
+            WebElement element = findElement(locator);
+            boolean isDisplayed = element.isDisplayed();
+            GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
+            log.info("El elemento: {} se encuentra visible y correcto guardo de evidencia", locator);
+            return isDisplayed;
+        } catch (Exception e) {
+            GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
+            log.fatal("El elemento: {} no se encuentra visible, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Método para verificar si un elemento está siendo <b>mostrado</b> en la interfaz de usuario.
+     *
+     * @param locator          el localizador del elemento
+     * @param tiempoEspera     el tiempo de espera en segundos para encontrar el elemento web
+     * @param mensajeEvidencia el mensaje que se desea capturar en la evidencia
+     * @return true si el elemento está siendo mostrado, false de lo contrario
+     * @throws RuntimeException si el elemento no puede ser encontrado o si ocurre un error al intentar determinar su visibilidad
+     */
+    public static boolean isDisplayed(By locator, int tiempoEspera, String mensajeEvidencia) {
+        try {
+            WebElement element = findElement(locator, tiempoEspera);
+            boolean isDisplayed = element.isDisplayed();
+            GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
+            log.info("El elemento: {} se encuentra visible, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
+            return isDisplayed;
+        } catch (Exception e) {
+            GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
+            log.fatal("El elemento: {} no se encuentra visible, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Método para verificar si un elemento está <b>habilitado</b> en la interfaz de usuario.
+     *
+     * @param locator el localizador del elemento
+     * @return true si el elemento está habilitado, false de lo contrario
+     * @throws RuntimeException si el elemento no puede ser encontrado o si ocurre un error al intentar determinar su habilitación
+     */
+    public static boolean isEnable(By locator) {
+        try {
+            WebElement element = findElement(locator);
+            boolean isEnable = element.isEnabled();
+            log.info("El elemento: {} se encuentra habilitado", locator);
+            return isEnable;
+        } catch (Exception e) {
+            log.fatal("El elemento: {} no se encuentra habilitado, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Método para verificar si un elemento está <b>habilitado</b> en la interfaz de usuario.
+     *
+     * @param locator      el localizador del elemento
+     * @param tiempoEspera el tiempo de espera en segundos para encontrar el elemento web
+     * @return true si el elemento está habilitado, false de lo contrario
+     * @throws RuntimeException si el elemento no puede ser encontrado o si ocurre un error al intentar determinar su habilitación
+     */
+    public static boolean isEnable(By locator, int tiempoEspera) {
+        try {
+            WebElement element = findElement(locator, tiempoEspera);
+            boolean isEnable = element.isEnabled();
+            log.info("El elemento: {} se encuentra habilitado", locator);
+            return isEnable;
+        } catch (Exception e) {
+            log.fatal("El elemento: {} no se encuentra habilitado, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Método para verificar si un elemento está <b>habilitado</b> en la interfaz de usuario.
+     *
+     * @param locator          el localizador del elemento
+     * @param mensajeEvidencia el mensaje que se desea capturar en la evidencia
+     * @return true si el elemento está habilitado, false de lo contrario
+     * @throws RuntimeException si el elemento no puede ser encontrado o si ocurre un error al intentar determinar su habilitación
+     */
+    public static boolean isEnable(By locator, String mensajeEvidencia) {
+        try {
+            WebElement element = findElement(locator);
+            boolean isEnable = element.isEnabled();
+            GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
+            log.info("El elemento: {} se encuentra habilitado y correcto guardo de evidencia", locator);
+            return isEnable;
+        } catch (Exception e) {
+            GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
+            log.fatal("El elemento: {} no se encuentra habilitado, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Método para verificar si un elemento está <b>habilitado</b> en la interfaz de usuario.
+     *
+     * @param locator          el localizador del elemento
+     * @param tiempoEspera     el tiempo de espera en segundos para encontrar el elemento web
+     * @param mensajeEvidencia el mensaje que se desea capturar en la evidencia
+     * @return true si el elemento está habilitado, false de lo contrario
+     * @throws RuntimeException si el elemento no puede ser encontrado o si ocurre un error al intentar determinar su habilitación
+     */
+    public static boolean isEnable(By locator, int tiempoEspera, String mensajeEvidencia) {
+        try {
+            WebElement element = findElement(locator, tiempoEspera);
+            boolean isEnable = element.isEnabled();
+            GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
+            log.info("El elemento: {} se encuentra habilitado, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
+            return isEnable;
+        } catch (Exception e) {
+            GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
+            log.fatal("El elemento: {} no se encuentra habilitado, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Método para verificar si un elemento está <b>seleccionado</b> en la interfaz de usuario.
+     * <br/>
+     * Este método se utiliza con elementos de entrada como casillas de verificación (checkbox), botones de radio (radio buttons),
+     * elementos de entrada (input) y elementos de opción (option).
+     *
+     * @param locator el localizador del elemento
+     * @return true si el elemento está seleccionado, false de lo contrario
+     * @throws RuntimeException si el elemento no puede ser encontrado o si ocurre un error al intentar determinar su selección
+     */
+    public static boolean isSelected(By locator) {
+        try {
+            WebElement element = findElement(locator);
+            boolean isSelected = element.isSelected();
+            log.info("El elemento: {} se encuentra seleccionado", locator);
+            return isSelected;
+        } catch (Exception e) {
+            log.fatal("El elemento: {} no se encuentra seleccionado, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Método para verificar si un elemento está <b>seleccionado</b> en la interfaz de usuario.
+     * <br/>
+     * Este método se utiliza con elementos de entrada como casillas de verificación (checkbox), botones de radio (radio buttons),
+     * elementos de entrada (input) y elementos de opción (option).
+     *
+     * @param locator      el localizador del elemento
+     * @param tiempoEspera el tiempo de espera en segundos para encontrar el elemento web
+     * @return true si el elemento está seleccionado, false de lo contrario
+     * @throws RuntimeException si el elemento no puede ser encontrado o si ocurre un error al intentar determinar su selección
+     */
+    public static boolean isSelected(By locator, int tiempoEspera) {
+        try {
+            WebElement element = findElement(locator, tiempoEspera);
+            boolean isSelected = element.isSelected();
+            log.info("El elemento: {} se encuentra seleccionado", locator);
+            return isSelected;
+        } catch (Exception e) {
+            log.fatal("El elemento: {} no se encuentra seleccionado, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Método para verificar si un elemento está <b>seleccionado</b> en la interfaz de usuario.
+     * <br/>
+     * Este método se utiliza con elementos de entrada como casillas de verificación (checkbox), botones de radio (radio buttons),
+     * elementos de entrada (input) y elementos de opción (option).
+     *
+     * @param locator          el localizador del elemento
+     * @param mensajeEvidencia el mensaje que se desea capturar en la evidencia
+     * @return true si el elemento está seleccionado, false de lo contrario
+     * @throws RuntimeException si el elemento no puede ser encontrado o si ocurre un error al intentar determinar su selección
+     */
+    public static boolean isSelected(By locator, String mensajeEvidencia) {
+        try {
+            WebElement element = findElement(locator);
+            boolean isSelected = element.isSelected();
+            GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
+            log.info("El elemento: {} se encuentra seleccionado y correcto guardo de evidencia", locator);
+            return isSelected;
+        } catch (Exception e) {
+            GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
+            log.fatal("El elemento: {} no se encuentra seleccionado, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Método para verificar si un elemento está <b>seleccionado</b> en la interfaz de usuario.
+     * <br/>
+     * Este método se utiliza con elementos de entrada como casillas de verificación (checkbox), botones de radio (radio buttons),
+     * elementos de entrada (input) y elementos de opción (option).
+     *
+     * @param locator          el localizador del elemento
+     * @param tiempoEspera     el tiempo de espera en segundos para encontrar el elemento web
+     * @param mensajeEvidencia el mensaje que se desea capturar en la evidencia
+     * @return true si el elemento está seleccionado, false de lo contrario
+     * @throws RuntimeException si el elemento no puede ser encontrado o si ocurre un error al intentar determinar su selección
+     */
+    public static boolean isSelected(By locator, int tiempoEspera, String mensajeEvidencia) {
+        try {
+            WebElement element = findElement(locator, tiempoEspera);
+            boolean isSelected = element.isSelected();
+            GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
+            log.info("El elemento: {} se encuentra seleccionado, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
+            return isSelected;
+        } catch (Exception e) {
+            GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
+            log.fatal("El elemento: {} no se encuentra seleccionado, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
      * Obtiene el título de la página actual.
      *
      * @return El título de la página actual como una cadena de caracteres.
