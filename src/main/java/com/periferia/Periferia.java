@@ -550,39 +550,84 @@ public class Periferia {
     }
 
     public static String obtenerTitulo() {
-        return driver.getTitle();
+        try {
+            return driver.getTitle();
+        } catch (Exception e) {
+            log.fatal("No fue posible obtener el titulo de la pagina, por el error {}", e.getMessage());
+            throw new IllegalStateException("No se pudo obtener el título de la página.", e);
+        }
     }
 
     public static String obtenerUrlActual() {
-        return driver.getCurrentUrl();
+        try {
+            return driver.getCurrentUrl();
+        } catch (Exception e) {
+            log.fatal("No fue posible obtener la url actual de la pagina, por el error {}", e.getMessage());
+            throw new IllegalStateException("No se pudo obtener la URL actual de la página.", e);
+        }
     }
 
     public static void paginaAtras() {
-        driver.navigate().back();
+        try {
+            driver.navigate().back();
+        } catch (Exception e) {
+            log.fatal("No fue posible navegar a la pagina anterior, por el error {}", e.getMessage());
+            throw new IllegalStateException("No se pudo navegar a la página anterior.", e);
+        }
     }
 
     public static void paginaAdelante() {
-        driver.navigate().forward();
+        try {
+            driver.navigate().forward();
+        } catch (Exception e) {
+            log.fatal("No fue posible navegar a la pagina siguiente, por el error {}", e.getMessage());
+            throw new IllegalStateException("No se pudo navegar a la página siguiente.", e);
+        }
     }
 
     public static void actualizarPagina() {
-        driver.navigate().refresh();
+        try {
+            driver.navigate().refresh();
+        } catch (Exception e) {
+            log.fatal("No fue posible actualizar la pagina, por el error {}", e.getMessage());
+            throw new IllegalStateException("No se pudo actualizar la página.", e);
+        }
     }
 
     public static void cambiarFrame(String frameID) {
-        driver.switchTo().frame(frameID);
+        try {
+            driver.switchTo().frame(frameID);
+        } catch (Exception e) {
+            log.fatal("No fue posible cambiar de frame, por el error {}", e.getMessage());
+            throw new IllegalStateException("No se pudo cambiar de frame.", e);
+        }
     }
 
     public static void cambiarFrame(int index) {
-        driver.switchTo().frame(index);
+        try {
+            driver.switchTo().frame(index);
+        } catch (Exception e) {
+            log.fatal("No fue posible cambiar de frame, por el error {}", e.getMessage());
+            throw new IllegalStateException("No se pudo cambiar de frame.", e);
+        }
     }
 
     public static void cambiarFrame(By nombreFrame) {
-        driver.switchTo().frame(Periferia.findElement(nombreFrame));
+        try {
+            driver.switchTo().frame(findElement(nombreFrame));
+        } catch (Exception e) {
+            log.fatal("No fue posible cambiar de frame, por el error {}", e.getMessage());
+            throw new IllegalStateException("No se pudo cambiar de frame.", e);
+        }
     }
 
     public static void salirFrame() {
-        driver.switchTo().defaultContent();
+        try {
+            driver.switchTo().parentFrame();
+        } catch (Exception e) {
+            log.fatal("No fue posible salir del frame, por el error {}", e.getMessage());
+            throw new IllegalStateException("No se pudo salir del frame.", e);
+        }
     }
 
     public static void printConsole(Object message){
