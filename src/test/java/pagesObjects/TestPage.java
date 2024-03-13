@@ -38,13 +38,17 @@ public class TestPage extends TestMap {
     public void getTextTest() {
         By textTest = By.xpath("//p[@id='text-test']");
 
-        Periferia.getText(textTest);
+        String texto = Periferia.getText(textTest);
+        Periferia.printConsole(texto);
 
-        Periferia.getText(textTest, 5);
+        String text2 = Periferia.getText(textTest, 5);
+        Periferia.printConsole(text2);
 
-        Periferia.getText(textTest, "Obtener texto");
+        String text3 = Periferia.getText(textTest, "Obtener texto");
+        Periferia.printConsole(text3);
 
-        Periferia.getText(textTest, 5, "Obtener texto");
+        String text4 = Periferia.getText(textTest, 5, "Obtener texto");
+        Periferia.printConsole(text4);
     }
 
     public void clearTest() {
