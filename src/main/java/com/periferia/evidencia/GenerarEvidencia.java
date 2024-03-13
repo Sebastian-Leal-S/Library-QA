@@ -1,8 +1,6 @@
 package com.periferia.evidencia;
 
 import com.periferia.utilities.CaptureScreen;
-import com.periferia.utilities.GenerarReportePDF;
-import com.periferia.utilities.GenerarReporteVideo;
 import com.periferia.utilities.GestorArchivos;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
