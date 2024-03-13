@@ -549,6 +549,12 @@ public class Periferia {
         }
     }
 
+    /**
+     * Obtiene el título de la página actual.
+     *
+     * @return El título de la página actual como una cadena de caracteres.
+     * @throws IllegalStateException Si no es posible obtener el título de la página.
+     */
     public static String obtenerTitulo() {
         try {
             return driver.getTitle();
@@ -558,6 +564,12 @@ public class Periferia {
         }
     }
 
+    /**
+     * Obtiene la URL actual de la página.
+     *
+     * @return La URL actual de la página como una cadena de caracteres.
+     * @throws IllegalStateException Si no es posible obtener la URL actual de la página.
+     */
     public static String obtenerUrlActual() {
         try {
             return driver.getCurrentUrl();
@@ -567,6 +579,11 @@ public class Periferia {
         }
     }
 
+    /**
+     * Navega a la página anterior en el historial del navegador.
+     *
+     * @throws IllegalStateException Si no es posible navegar a la página anterior.
+     */
     public static void paginaAtras() {
         try {
             driver.navigate().back();
@@ -576,6 +593,11 @@ public class Periferia {
         }
     }
 
+    /**
+     * Navega a la página siguiente en el historial del navegador.
+     *
+     * @throws IllegalStateException Si no es posible navegar a la página siguiente.
+     */
     public static void paginaAdelante() {
         try {
             driver.navigate().forward();
@@ -585,6 +607,11 @@ public class Periferia {
         }
     }
 
+    /**
+     * Actualiza la página actual.
+     *
+     * @throws IllegalStateException Si no es posible actualizar la página.
+     */
     public static void actualizarPagina() {
         try {
             driver.navigate().refresh();
@@ -594,6 +621,12 @@ public class Periferia {
         }
     }
 
+    /**
+     * Cambia el foco del controlador de Selenium al frame especificado.
+     *
+     * @param frameID El ID del marco al que se desea cambiar el foco.
+     * @throws IllegalStateException Si no es posible cambiar el foco al marco especificado.
+     */
     public static void cambiarFrame(String frameID) {
         try {
             driver.switchTo().frame(frameID);
@@ -603,6 +636,12 @@ public class Periferia {
         }
     }
 
+    /**
+     * Cambia el foco del controlador de Selenium al frame especificado.
+     *
+     * @param index El índice del marco al que se desea cambiar el foco.
+     * @throws IllegalStateException Si no es posible cambiar el foco al marco especificado.
+     */
     public static void cambiarFrame(int index) {
         try {
             driver.switchTo().frame(index);
@@ -612,6 +651,12 @@ public class Periferia {
         }
     }
 
+    /**
+     * Cambia el foco del controlador de Selenium al frame especificado.
+     *
+     * @param nombreFrame El nombre del marco al que se desea cambiar el foco.
+     * @throws IllegalStateException Si no es posible cambiar el foco al marco especificado.
+     */
     public static void cambiarFrame(By nombreFrame) {
         try {
             driver.switchTo().frame(findElement(nombreFrame));
@@ -621,6 +666,11 @@ public class Periferia {
         }
     }
 
+    /**
+     * Sale del frame actual y regresa al frame padre.
+     *
+     * @throws IllegalStateException Si no es posible salir del frame.
+     */
     public static void salirFrame() {
         try {
             driver.switchTo().parentFrame();
@@ -630,7 +680,12 @@ public class Periferia {
         }
     }
 
+    /**
+     * Imprime un mensaje en la consola utilizando el nivel de registro de información.
+     *
+     * @param message El mensaje a imprimir en la consola.
+     */
     public static void printConsole(Object message){
-        System.out.println(message);
+        log.info(message);
     }
 }
