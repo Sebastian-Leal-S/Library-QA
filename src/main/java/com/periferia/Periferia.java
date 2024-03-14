@@ -814,6 +814,86 @@ public class Periferia {
     }
 
     /**
+     * Obtiene el tag del elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator El localizador utilizado para encontrar el elemento web.
+     * @return El tag del elemento web.
+     * @throws NoSuchElementException Si el tag del elemento web no se encuentra en el tiempo de espera de 3 segundos.
+     */
+    public static String obtenerTag(By locator) {
+        try {
+            WebElement element = findElement(locator);
+            String tag = element.getTagName();
+            log.debug("Se obtuvo el tag '{}' sobre el elemento: {}", tag, locator);
+            return tag;
+        } catch (Exception e) {
+            log.fatal("No fue posible obtener el tag sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Obtiene el tag del elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator      El localizador utilizado para encontrar el elemento web.
+     * @param tiempoEspera El tiempo de espera en segundos para encontrar el elemento web.
+     * @return El tag del elemento web.
+     * @throws NoSuchElementException Si el tag del elemento web no se encuentra en el tiempo de espera proporcionado.
+     */
+    public static String obtenerTag(By locator, int tiempoEspera) {
+        try {
+            WebElement element = findElement(locator, tiempoEspera);
+            String tag = element.getTagName();
+            log.debug("Se obtuvo el tag sobre el elemento: {}, dentro del tiempo {} seg", locator, tiempoEspera);
+            return tag;
+        } catch (Exception e) {
+            log.fatal("No fue posible obtener el tag sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Obtiene el atributo del elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator  El localizador utilizado para encontrar el elemento web.
+     * @param atributo El atributo que se desea obtener del elemento web.
+     * @return El valor del atributo del elemento web.
+     * @throws NoSuchElementException Si el atributo del elemento web no se encuentra en el tiempo de espera de 3 segundos.
+     */
+    public static String obtenerAtributo(By locator, String atributo) {
+        try {
+            WebElement element = findElement(locator);
+            String attribute = element.getAttribute(atributo);
+            log.debug("Se obtuvo el atributo '{}' sobre el elemento: {}", attribute, locator);
+            return attribute;
+        } catch (Exception e) {
+            log.fatal("No fue posible obtener el atributo sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Obtiene el atributo del elemento web que coincide con el localizador proporcionado.
+     *
+     * @param locator      El localizador utilizado para encontrar el elemento web.
+     * @param atributo     El atributo que se desea obtener del elemento web.
+     * @param tiempoEspera El tiempo de espera en segundos para encontrar el elemento web.
+     * @return El valor del atributo del elemento web.
+     * @throws NoSuchElementException Si el atributo del elemento web no se encuentra en el tiempo de espera proporcionado.
+     */
+    public static String obtenerAtributo(By locator, String atributo, int tiempoEspera) {
+        try {
+            WebElement element = findElement(locator, tiempoEspera);
+            String attribute = element.getAttribute(atributo);
+            log.debug("Se obtuvo el atributo sobre el elemento: {}, dentro del tiempo {} seg", locator, tiempoEspera);
+            return attribute;
+        } catch (Exception e) {
+            log.fatal("No fue posible obtener el atributo sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
      * Obtiene el título de la página actual.
      *
      * @return El título de la página actual como una cadena de caracteres.
