@@ -238,7 +238,7 @@ public class Periferia {
         try {
             WebElement element = findElement(locator);
             element.click();
-            log.info("Click en el elemento: {}", locator);
+            log.debug("Click en el elemento: {}", locator);
         } catch (ElementNotInteractableException e) {
             log.error("No fue posible realizar clic sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
             throw e;
@@ -256,7 +256,7 @@ public class Periferia {
         try {
             WebElement element = findElement(locator, tiempoEspera);
             element.click();
-            log.info("Click en el elemento: {}, dentro del tiempo {} seg", locator, tiempoEspera);
+            log.debug("Click en el elemento: {}, dentro del tiempo {} seg", locator, tiempoEspera);
         } catch (ElementNotInteractableException e) {
             log.fatal("No fue posible realizar clic sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
             throw e;
@@ -275,7 +275,7 @@ public class Periferia {
             WebElement element = findElement(locator);
             element.click();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
-            log.info("Click en el elemento: {} y correcto guardo de evidencia", locator);
+            log.debug("Click en el elemento: {} y correcto guardo de evidencia", locator);
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
             log.fatal("No fue posible realizar clic sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
@@ -296,7 +296,7 @@ public class Periferia {
             WebElement element = findElement(locator, tiempoEspera);
             element.click();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
-            log.info("Click en el elemento: {}, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
+            log.debug("Click en el elemento: {}, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
             log.fatal("No fue posible realizar clic sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
@@ -315,7 +315,7 @@ public class Periferia {
         try {
             WebElement element = findElement(locator);
             element.sendKeys(texto);
-            log.info("Envio de texto '{}' sobre el elemento: {}", texto, locator);
+            log.debug("Envio de texto '{}' sobre el elemento: {}", texto, locator);
         } catch (Exception e) {
             log.fatal("No fue posible realizar el envio de texto sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
             throw e;
@@ -334,7 +334,7 @@ public class Periferia {
         try {
             WebElement element = findElement(locator, tiempoEspera);
             element.sendKeys(texto);
-            log.info("Envio de texto '{}' sobre el elemento: {}, dentro del tiempo {} seg", texto, locator, tiempoEspera);
+            log.debug("Envio de texto '{}' sobre el elemento: {}, dentro del tiempo {} seg", texto, locator, tiempoEspera);
         } catch (Exception e) {
             log.fatal("No fue posible realizar el envio de texto sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
             throw e;
@@ -354,7 +354,7 @@ public class Periferia {
             WebElement element = findElement(locator);
             element.sendKeys(texto);
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
-            log.info("Envio de texto '{}' sobre el elemento: {} y correcto guardo de evidencia", texto, locator);
+            log.debug("Envio de texto '{}' sobre el elemento: {} y correcto guardo de evidencia", texto, locator);
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
             log.fatal("No fue posible realizar el envio de texto sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
@@ -376,7 +376,7 @@ public class Periferia {
             WebElement element = findElement(locator, tiempoEspera);
             element.sendKeys(texto);
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
-            log.info("Envio de texto '{}' sobre el elemento: {}, dentro del tiempo {} seg y correcto guardo de evidencia", texto, locator, tiempoEspera);
+            log.debug("Envio de texto '{}' sobre el elemento: {}, dentro del tiempo {} seg y correcto guardo de evidencia", texto, locator, tiempoEspera);
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
             log.fatal("No fue posible realizar el envio de texto sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
@@ -395,7 +395,7 @@ public class Periferia {
         try {
             WebElement element = findElement(locator);
             String text = element.getText();
-            log.info("Se obtuvo el texto '{}' sobre el elemento: {}", text, locator);
+            log.debug("Se obtuvo el texto '{}' sobre el elemento: {}", text, locator);
             return text;
         } catch (Exception e) {
             log.fatal("No fue posible obtener el texto sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
@@ -415,7 +415,7 @@ public class Periferia {
         try {
             WebElement element = findElement(locator, tiempoEspera);
             String text = element.getText();
-            log.info("Se obtuvi texto sobre el elemento: {}, dentro del tiempo {} seg", locator, tiempoEspera);
+            log.debug("Se obtuvi texto sobre el elemento: {}, dentro del tiempo {} seg", locator, tiempoEspera);
             return text;
         } catch (Exception e) {
             log.fatal("No fue posible obtener el texto sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
@@ -436,7 +436,7 @@ public class Periferia {
             WebElement element = findElement(locator);
             String text = element.getText();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
-            log.info("Obtener texto sobre el elemento: {} y correcto guardo de evidencia", locator);
+            log.debug("Obtener texto sobre el elemento: {} y correcto guardo de evidencia", locator);
             return text;
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
@@ -459,7 +459,7 @@ public class Periferia {
             WebElement element = findElement(locator, tiempoEspera);
             String text = element.getText();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
-            log.info("Obtener texto sobre el elemento: {}, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
+            log.debug("Obtener texto sobre el elemento: {}, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
             return text;
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
@@ -472,13 +472,13 @@ public class Periferia {
      * Limpia el contenido del campo identificado por el locator especificado.
      *
      * @param locator El locator del elemento cuyo campo se desea limpiar.
-     * @throws Exception Si no es posible limpiar el campo del elemento.
+     * @throws NoSuchElementException Si no es posible limpiar el campo del elemento.
      */
     public static void clear(By locator) {
         try {
             WebElement element = findElement(locator);
             element.clear();
-            log.info("Limpiar campo sobre el elemento: {}", locator);
+            log.debug("Limpiar campo sobre el elemento: {}", locator);
         } catch (Exception e) {
             log.fatal("No fue posible limpiar el campo sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
             throw e;
@@ -490,13 +490,13 @@ public class Periferia {
      *
      * @param locator El locator del elemento cuyo campo se desea limpiar.
      * @param tiempoEspera El tiempo de espera en segundos para encontrar el elemento web.
-     * @throws Exception Si no es posible limpiar el campo del elemento.
+     * @throws NoSuchElementException Si no es posible limpiar el campo del elemento.
      */
     public static void clear(By locator, int tiempoEspera) {
         try {
             WebElement element = findElement(locator, tiempoEspera);
             element.clear();
-            log.info("Limpiar campo sobre el elemento: {}, dentro del tiempo {} seg", locator, tiempoEspera);
+            log.debug("Limpiar campo sobre el elemento: {}, dentro del tiempo {} seg", locator, tiempoEspera);
         } catch (Exception e) {
             log.fatal("No fue posible limpiar el campo sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
             throw e;
@@ -508,14 +508,14 @@ public class Periferia {
      *
      * @param locator El locator del elemento cuyo campo se desea limpiar.
      * @param mensajeEvidencia El mensaje que se desea capturar en la evidencia.
-     * @throws Exception Si no es posible limpiar el campo del elemento.
+     * @throws NoSuchElementException Si no es posible limpiar el campo del elemento.
      */
     public static void clear(By locator, String mensajeEvidencia) {
         try {
             WebElement element = findElement(locator);
             element.clear();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
-            log.info("Limpiar campo sobre el elemento: {} y correcto guardo de evidencia", locator);
+            log.debug("Limpiar campo sobre el elemento: {} y correcto guardo de evidencia", locator);
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
             log.fatal("No fue posible limpiar el campo sobre el elemento {}, en el tiempo 3 seg, por el error {}", locator, e.getMessage());
@@ -536,7 +536,7 @@ public class Periferia {
             WebElement element = findElement(locator, tiempoEspera);
             element.clear();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
-            log.info("Limpiar campo sobre el elemento: {}, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
+            log.debug("Limpiar campo sobre el elemento: {}, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
             log.fatal("No fue posible limpiar el campo sobre el elemento {}, en el tiempo {}, por el error {}", locator, tiempoEspera, e.getMessage());
@@ -555,7 +555,7 @@ public class Periferia {
         try {
             WebElement element = findElement(locator);
             boolean isDisplayed = element.isDisplayed();
-            log.info("El elemento: {} se encuentra visible", locator);
+            log.debug("El elemento: {} se encuentra visible", locator);
             return isDisplayed;
         } catch (Exception e) {
             log.fatal("El elemento: {} no se encuentra visible, por el error {}", locator, e.getMessage());
@@ -575,7 +575,7 @@ public class Periferia {
         try {
             WebElement element = findElement(locator, tiempoEspera);
             boolean isDisplayed = element.isDisplayed();
-            log.info("El elemento: {} se encuentra visible", locator);
+            log.debug("El elemento: {} se encuentra visible", locator);
             return isDisplayed;
         } catch (Exception e) {
             log.fatal("El elemento: {} no se encuentra visible, por el error {}", locator, e.getMessage());
@@ -596,7 +596,7 @@ public class Periferia {
             WebElement element = findElement(locator);
             boolean isDisplayed = element.isDisplayed();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
-            log.info("El elemento: {} se encuentra visible y correcto guardo de evidencia", locator);
+            log.debug("El elemento: {} se encuentra visible y correcto guardo de evidencia", locator);
             return isDisplayed;
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
@@ -619,7 +619,7 @@ public class Periferia {
             WebElement element = findElement(locator, tiempoEspera);
             boolean isDisplayed = element.isDisplayed();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
-            log.info("El elemento: {} se encuentra visible, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
+            log.debug("El elemento: {} se encuentra visible, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
             return isDisplayed;
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
@@ -639,7 +639,7 @@ public class Periferia {
         try {
             WebElement element = findElement(locator);
             boolean isEnable = element.isEnabled();
-            log.info("El elemento: {} se encuentra habilitado", locator);
+            log.debug("El elemento: {} se encuentra habilitado", locator);
             return isEnable;
         } catch (Exception e) {
             log.fatal("El elemento: {} no se encuentra habilitado, por el error {}", locator, e.getMessage());
@@ -659,7 +659,7 @@ public class Periferia {
         try {
             WebElement element = findElement(locator, tiempoEspera);
             boolean isEnable = element.isEnabled();
-            log.info("El elemento: {} se encuentra habilitado", locator);
+            log.debug("El elemento: {} se encuentra habilitado", locator);
             return isEnable;
         } catch (Exception e) {
             log.fatal("El elemento: {} no se encuentra habilitado, por el error {}", locator, e.getMessage());
@@ -680,7 +680,7 @@ public class Periferia {
             WebElement element = findElement(locator);
             boolean isEnable = element.isEnabled();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
-            log.info("El elemento: {} se encuentra habilitado y correcto guardo de evidencia", locator);
+            log.debug("El elemento: {} se encuentra habilitado y correcto guardo de evidencia", locator);
             return isEnable;
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
@@ -703,7 +703,7 @@ public class Periferia {
             WebElement element = findElement(locator, tiempoEspera);
             boolean isEnable = element.isEnabled();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
-            log.info("El elemento: {} se encuentra habilitado, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
+            log.debug("El elemento: {} se encuentra habilitado, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
             return isEnable;
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
@@ -726,7 +726,7 @@ public class Periferia {
         try {
             WebElement element = findElement(locator);
             boolean isSelected = element.isSelected();
-            log.info("El elemento: {} se encuentra seleccionado", locator);
+            log.debug("El elemento: {} se encuentra seleccionado", locator);
             return isSelected;
         } catch (Exception e) {
             log.fatal("El elemento: {} no se encuentra seleccionado, por el error {}", locator, e.getMessage());
@@ -749,7 +749,7 @@ public class Periferia {
         try {
             WebElement element = findElement(locator, tiempoEspera);
             boolean isSelected = element.isSelected();
-            log.info("El elemento: {} se encuentra seleccionado", locator);
+            log.debug("El elemento: {} se encuentra seleccionado", locator);
             return isSelected;
         } catch (Exception e) {
             log.fatal("El elemento: {} no se encuentra seleccionado, por el error {}", locator, e.getMessage());
@@ -773,7 +773,7 @@ public class Periferia {
             WebElement element = findElement(locator);
             boolean isSelected = element.isSelected();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
-            log.info("El elemento: {} se encuentra seleccionado y correcto guardo de evidencia", locator);
+            log.debug("El elemento: {} se encuentra seleccionado y correcto guardo de evidencia", locator);
             return isSelected;
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
@@ -799,7 +799,7 @@ public class Periferia {
             WebElement element = findElement(locator, tiempoEspera);
             boolean isSelected = element.isSelected();
             GenerarEvidencia.capturarEvidencia(driver, mensajeEvidencia);
-            log.info("El elemento: {} se encuentra seleccionado, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
+            log.debug("El elemento: {} se encuentra seleccionado, dentro del tiempo {} seg y correcto guardo de evidencia", locator, tiempoEspera);
             return isSelected;
         } catch (Exception e) {
             GenerarEvidencia.capturarEvidencia(driver, e.getMessage(), locator);
