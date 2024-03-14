@@ -45,9 +45,8 @@ public class Periferia {
      */
     public static SelfHealingDriver setUp(Navegador navegador) {
         try {
-            log.info("Inicializando el driver... con el navegador {}", navegador);
             driver = SeleniumDriver.initDriver(navegador);
-            log.info("Driver inicializado correctamente");
+            log.info("Driver iniciado correctamente con el navegador {}", navegador);
         }catch (WebDriverException e){
             log.fatal("Error al inicializar el controlador: {}", e.getMessage());
             throw new WebDriverException("No se pudo inicializar el driver", e);
@@ -65,9 +64,9 @@ public class Periferia {
      */
     public static SelfHealingDriver setUp(Navegador navegador, String url) {
         try {
-            log.info("Inicializando el driver... con el navegador {}", navegador);
             driver = SeleniumDriver.initDriver(navegador);
-            log.info("Driver inicializado correctamente");
+            log.info("Driver iniciado correctamente con el navegador {}", navegador);
+
             Periferia.goUrl(url);
         }catch (WebDriverException e){
             log.fatal("Error al inicializar el controlador: {}", e.getMessage());
@@ -87,10 +86,8 @@ public class Periferia {
     public static SelfHealingDriver setUp(String navegador) {
         try {
             Navegador navegadorEmun = Navegador.valueOf(navegador.toUpperCase());
-
-            log.info("Inicializando el driver... con el navegador {}", navegadorEmun);
             driver = SeleniumDriver.initDriver(navegadorEmun);
-            log.info("Driver inicializado correctamente");
+            log.info("Driver inciado correctamente con el navegador {}", navegadorEmun);
         }catch (IllegalArgumentException e){
             log.fatal("El navegador no es valido: {}", e.getMessage());
             throw new IllegalArgumentException("El navegador no es valido", e);
@@ -113,10 +110,9 @@ public class Periferia {
     public static SelfHealingDriver setUp(String navegador, String url) {
         try {
             Navegador navegadorEmun = Navegador.valueOf(navegador.toUpperCase());
-
-            log.info("Inicializando el driver... con el navegador {}", navegadorEmun);
             driver = SeleniumDriver.initDriver(navegadorEmun);
-            log.info("Driver inicializado correctamente");
+            log.info("Driver iniciado correctamente con el navegador {}", navegadorEmun);
+
             Periferia.goUrl(url);
         }catch (IllegalArgumentException e){
             log.fatal("El navegador no es valido: {}", e.getMessage());
@@ -153,7 +149,6 @@ public class Periferia {
             throw new WebDriverException("No se pudo navegar a la url", e);
         }
     }
-
 
     /**
      * Encuentra un elemento web utilizando el localizador proporcionado.
