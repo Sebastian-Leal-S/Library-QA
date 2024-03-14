@@ -1,19 +1,26 @@
-<configuration status="info">
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
     <Properties>
-        <Property name="layout">%d [%t] %-5level %logger - %m%n</Property>
+        <Property name="filepath">./logs</Property>
     </Properties>
     <Appenders>
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="${layout}"/>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
         </Console>
-        <File name="LogFile" fileName="logs/log.log">
-            <PatternLayout pattern="%d %c{1.} [%t] %m%n"/>
-        </File>
+        <RollingFile name="file" fileName="${filepath}/logEvidencias.log"
+                     filePattern="${filepath}/logEvidencias-%d{HH-mm-ss}.log">
+            <PatternLayout>
+                <pattern>%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</pattern>
+            </PatternLayout>
+            <SizeBasedTriggeringPolicy size="2 MB"/>
+        </RollingFile>
     </Appenders>
     <Loggers>
+        <Logger name="com.Periferia" level="debug" additivity="false">
+            <AppenderRef ref="file"/>
+        </Logger>
         <Root level="info">
-            <AppenderRef ref="Console"/>
-            <AppenderRef ref="LogFile"/>
+            <AppenderRef ref="console"/>
         </Root>
     </Loggers>
 </configuration>
