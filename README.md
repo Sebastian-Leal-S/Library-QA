@@ -1,12 +1,13 @@
-# Library-QA <!-- omit in toc -->
+# Library-QA
 
-- [Introducción](#introducción)
-- [Instalación](#instalación)
-	- [Requisitos](#requisitos)
-	- [Uso proyectos maven](#uso-proyectos-maven)
+- [Library-QA](#library-qa)
+	- [Introducción](#introducción)
+	- [Instalación](#instalación)
+		- [Requisitos](#requisitos)
+		- [Uso en proyectos maven](#uso-en-proyectos-maven)
 	- [Ejemplo test](#ejemplo-test)
-- [Métodos](#métodos)
-- [Contribuciones](#contribuciones)
+	- [Métodos](#métodos)
+	- [Contribuciones](#contribuciones)
 
 ## Introducción
 
@@ -22,7 +23,7 @@ Libray-QA se crea con la idea de mejorar dia a dia, basado en el código y neces
   - Establece la variable de entorno `JAVA_HOME` en la ubicación del ejecutable de Java (el JDK, no el JRE).
   - Para probar esto, intenta ejecutar el comando ```javac```. Este comando no existirá si solo tienes instalado el JRE. Si te encuentras con una lista de opciones de línea de comandos, estás referenciando correctamente al JDK.
 
-### Uso proyectos maven
+### Uso en proyectos maven
 
 Comando de instalación desde CMD
 
@@ -42,7 +43,7 @@ Llamado dependencia en pom.xml
 </dependencies>
 ```
 
-### Ejemplo test
+## Ejemplo test
 
 TODO: Documentar caso completo con DataProvider, métodos Before y After.
 
@@ -72,7 +73,7 @@ public void casoDePrueba000000(String user, String password) {
 
 Los principales métodos de interacción cuentan con la misma estructura de sobrecarga, todos requerirán siempre de un localizador, y si se desea se puede variar el tiempo de espera, un mensaje para la evidencia o ambos parámetros.
 
-> Los métodos no generan evidencia de captura de pantalla dentro del archivo pdf si no se le indica un mensaje para la misma.
+> Los métodos no generan el paso dentro del archivo pdf si no se le indica un mensaje para la misma.
 
 ``` JAVA
 By button = By.xpath("xpathExpression");
@@ -82,6 +83,17 @@ Periferia.click(button);
 Periferia.click(button, tiempoEspera);
 Periferia.click(button, "Mensaje para la evidencia");
 Periferia.click(button, tiempoEspera, "Mensaje para la evidencia");
+```
+
+También se encuentran implementados métodos para obtener información de la pagina web.
+
+```JAVA
+By titular = By.xpath("xpathExpression")
+
+String texto_1 = Periferia.getText(titular);
+String texto_2 = Periferia.getText(titular, tiempoEspera);
+String texto_3 = Periferia.getText(titular, "Mensaje para la evidencia");
+String texto_4 = Periferia.getText(titular, tiempoEspera, "Mensaje para la evidencia");
 ```
 
 Hay métodos que pueden devolver valores como obtenerTexto o obtenerUrl, que mas adelante se mostrar como se implementan.
