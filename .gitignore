@@ -49,6 +49,7 @@ build/
 /outputData/
 /allure-results/
 /infra/screenshots/
+*.pdf
 
 ### Java ###
 # Compiled class file
