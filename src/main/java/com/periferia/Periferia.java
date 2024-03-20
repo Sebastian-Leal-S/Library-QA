@@ -1019,10 +1019,31 @@ public class Periferia {
         }
     }
 
+    /**
+     * Captura una evidencia de la pantalla actual.
+     *
+     * @param mensaje El mensaje que se desea capturar en la evidencia.
+     */
     public static void capturarEvidencia(String mensaje) {
         GenerarEvidencia.capturarEvidencia(driver, mensaje);
     }
-    
+
+    /**
+     * Captura una evidencia de la pantalla actual.
+     *
+     * @param mensaje      El mensaje que se desea capturar en la evidencia.
+     * @param tiempoEspera El tiempo de espera en segundos para capturar la evidencia.
+     * @throws InterruptedException Si ocurre un error al intentar capturar la evidencia.
+     */
+    public static void capturarEvidencia(String mensaje, int tiempoEspera) {
+        try {
+            Thread.sleep(tiempoEspera * 1000L);
+            GenerarEvidencia.capturarEvidencia(driver, mensaje);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * Imprime un mensaje en la consola utilizando el nivel de registro de información.
      *
