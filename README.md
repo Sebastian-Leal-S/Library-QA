@@ -50,22 +50,33 @@ TODO: Documentar caso completo con DataProvider, métodos Before y After.
 ``` JAVA
 @Test
 public void casoDePrueba000000(String user, String password) {
-	String url = "https://google.com";
-	String analista = "Analista Periferia";
-	String nameTest = Thread.currentThread().getStackTrace()[1].getMethodName();
-	
-	driver = Periferia.setUp(Navegador.CHROME)
-	Periferia.goUrl(url);
+ String url = "https://google.com";
+ String analista = "Analista Periferia";
+ String nameTest = Thread.currentThread().getStackTrace()[1].getMethodName();
+ 
+ driver = Periferia.setUp(Navegador.CHROME)
+ Periferia.goUrl(url);
 
-	GenerarEvidencia.iniciarEvidencia(nameTest, analista, url);
+ GenerarEvidencia.iniciarEvidencia(nameTest, analista, url);
 
-	testPage.iniciarSesion(user, password);
-	testPage.ingresoModuloCompras();
-	testPage.procesoPago();
-	testPage.verificarFactura();
-	testPage.cerrarSesion();
+ testPage.iniciarSesion(user, password);
+ testPage.ingresoModuloCompras();
+ testPage.procesoPago();
+ testPage.verificarFactura();
+ testPage.cerrarSesion();
 
-	GenerarEvidencia.finalizarEvidencia();
+ GenerarEvidencia.finalizarEvidencia();
+}
+```
+
+```JAVA
+public class TestPage {
+	public void iniciarSesion(String user, String password) {
+		Periferia.sendKeys(inputUser, user, "Ingreso usuario");
+		Periferia.sendKeys(inputPwd, password, "Ingreso contraseña");
+		Periferia.click(btnLogin)
+		Periferia.capturarEvidencia("Evidencia login correcto con credenciales, usuario: " + user" y contraseña: " + password)
+	}
 }
 ```
 
