@@ -82,7 +82,6 @@ public class TestPrincipal {
         GenerarEvidencia.finalizarEvidencia();
     }
 
-
     @AfterTest
     public void afterTest() {
         Periferia.tearDown();

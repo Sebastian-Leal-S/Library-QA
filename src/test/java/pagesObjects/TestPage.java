@@ -71,14 +71,18 @@ public class TestPage extends TestMap {
         By buttonText = By.xpath("//button[@id='button-change-text']");
 
         Periferia.click(buttonColor, "Clic para cambiar color");
-        Periferia.sendKeys(inputTest, "Hello", "Envio de texto");
+        Periferia.sendKeys(inputTest, "este texto tiene errores", "Envio de texto");
         Periferia.click(buttonText);
 
-        Assert.assertEquals("Hello", Periferia.getText(textTest));
+        Periferia.revisarOrtografia(textTest);
+
+        Assert.assertEquals("este texto tiene errores", Periferia.getText(textTest));
         Periferia.clear(inputTest);
 
         Periferia.sendKeys(inputTest, "Como estan?");
         Periferia.click(buttonColor);
-        Periferia.click(buttonColor, "Esto es para la evidencia");
+        Periferia.capturarEvidencia("Esto es para la evidencia");
+
+        Periferia.isSelected(buttonColor);
     }
 }
