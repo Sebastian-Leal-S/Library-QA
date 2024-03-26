@@ -38,6 +38,9 @@
 		<!-- Gestion version dependencias IA corrector xpath en tiempo de
 		ejecucion -->
 		<healenium-web.version>3.2.1</healenium-web.version>
+
+        <!-- Gestion version dependencias verificar estilo y gramatica -->
+        <languagetool.version>6.3</languagetool.version>
 	</properties>
 
 	<dependencies>
@@ -124,6 +127,18 @@
 			<artifactId>healenium-web</artifactId>
 			<version>${healenium-web.version}</version>
 		</dependency>
+
+        <!-- Dependencia para verificar estilo y gramatica -->
+        <dependency>
+            <groupId>org.languagetool</groupId>
+            <artifactId>languagetool-core</artifactId>
+            <version>${languagetool.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.languagetool</groupId>
+            <artifactId>language-es</artifactId>
+            <version>${languagetool.version}</version>
+        </dependency>
 	</dependencies>
 
 	<build>

@@ -4,6 +4,7 @@ import com.epam.healenium.SelfHealingDriver;
 import com.periferia.constantes.Navegador;
 import com.periferia.driver_manager.SeleniumDriver;
 import com.periferia.evidencia.GenerarEvidencia;
+import com.periferia.utilities.RevisorOrtografico;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
@@ -529,7 +530,6 @@ public class Periferia {
      * @param locator El locator del elemento cuyo campo se desea limpiar.
      * @param tiempoEspera El tiempo de espera en segundos para encontrar el elemento web.
      * @param mensajeEvidencia El mensaje que se desea capturar en la evidencia.
-     * @throws Exception Si no es posible limpiar el campo del elemento.
      */
     public static void clear(By locator, int tiempoEspera, String mensajeEvidencia) {
         try {
@@ -1042,6 +1042,11 @@ public class Periferia {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void revisarOrtografia(By locator) {
+        String texto = getText(locator);
+        RevisorOrtografico.checking(texto);
     }
 
     /**
