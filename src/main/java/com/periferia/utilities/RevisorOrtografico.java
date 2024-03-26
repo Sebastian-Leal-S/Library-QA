@@ -12,22 +12,22 @@ public class RevisorOrtografico {
         throw new IllegalStateException("Utility class");
     }
 
-    public static void checking(String text) {
+    /**
+     * Realiza una verificación ortográfica del texto proporcionado utilizando la biblioteca JLanguageTool para el idioma español.
+     * Devuelve una lista de coincidencias de reglas ortográficas.
+     *
+     * @param text El texto que se va a verificar ortográficamente.
+     * @return Una lista de objetos RuleMatch que representan las coincidencias de reglas ortográficas encontradas.
+     * Devuelve null si ocurre algún error durante el proceso de verificación.
+     */
+    public static List<RuleMatch> spellCheck(String text) {
         try {
             JLanguageTool langTool = new JLanguageTool(new Spanish());
             List<RuleMatch> matches = langTool.check(text);
-
-            for (RuleMatch match : matches) {
-                int inicio = match.getFromPos();
-                int fin = match.getToPos();
-                String error = text.substring(inicio, fin);
-                System.out.println("Palabra con error: " + error);
-                System.out.println("Sugerencias de correciones: " + match.getSuggestedReplacements());
-            }
+            return matches;
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        return null;
     }
-
 }

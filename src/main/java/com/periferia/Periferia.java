@@ -7,6 +7,7 @@ import com.periferia.evidencia.GenerarEvidencia;
 import com.periferia.utilities.RevisorOrtografico;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.languagetool.rules.RuleMatch;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -129,9 +130,15 @@ public class Periferia {
      * Cierra el controlador de Selenium si está inicializado.
      */
     public static void tearDown() {
-        if (driver != null){
-            driver.quit();
-            log.info("Driver cerrado correctamente");
+        try {
+            if (driver != null) {
+                Thread.sleep(2000);
+                driver.quit();
+                log.info("Driver cerrado correctamente");
+            }
+        } catch (WebDriverException | InterruptedException e) {
+            log.fatal("Error al cerrar el controlador: {}", e.getMessage());
+            throw new WebDriverException("No se pudo cerrar el driver", e);
         }
     }
 
@@ -1044,9 +1051,25 @@ public class Periferia {
         }
     }
 
+    /**
+     * Revisa la ortografía del texto obtenido mediante el localizador especificado.
+     * Obtiene el texto del elemento identificado por el localizador y luego realiza una verificación ortográfica.
+     * Para cada error ortográfico encontrado, registra el error y sus sugerencias de corrección en el archivo PDF y registro de depuración.
+     *
+     * @param locator El localizador que identifica el elemento del cual se obtendrá el texto para la revisión ortográfica.
+     */
     public static void revisarOrtografia(By locator) {
         String texto = getText(locator);
-        RevisorOrtografico.checking(texto);
+        List<RuleMatch> matches = RevisorOrtografico.spellCheck(texto);
+        assert matches != null;
+        for (RuleMatch match : matches) {
+            int inicio = match.getFromPos();
+            int fin = match.getToPos();
+            String error = texto.substring(inicio, fin);
+            log.debug("Palabra potencialmente mal escrita: {}", error);
+            log.debug("Sugerencias de correciones: {}", match.getSuggestedReplacements());
+            GenerarEvidencia.capturarEvidencia("Palabra potencialmente mal escrita: " + error, "Sugerencias de correciones: " + match.getSuggestedReplacements());
+        }
     }
 
     /**

@@ -74,4 +74,8 @@ public class GenerarEvidencia {
         GenerarReportePDF.createErrorBody(rutaImg, mensajeError, locator);
         GestorArchivos.eliminarArchivo(rutaImg);
     }
+
+    public static void capturarEvidencia(String error, String sugerencia) {
+        GenerarReportePDF.addSugerenciaOrtografia(error, sugerencia);
+    }
 }

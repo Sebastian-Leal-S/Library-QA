@@ -163,6 +163,25 @@ public class GenerarReportePDF {
         }
     }
 
+    public static void addSugerenciaOrtografia(String palabraConError, String sugerencias) {
+        try {
+            Paragraph title = new Paragraph();
+            title.setAlignment(Element.ALIGN_LEFT);
+            title.setFont(FONT_ERROR);
+            title.add("Posible falta ortográfica!!\n");
+            documento.add(title);
+
+            Paragraph parrafo = new Paragraph();
+            parrafo.setAlignment(Element.ALIGN_LEFT);
+            parrafo.setFont(FONT_MAIN);
+            parrafo.add(palabraConError + "\n" + sugerencias);
+
+            documento.add(parrafo);
+        } catch (DocumentException e) {
+            System.err.println("Falla al añadir el parrafo al pdf\n" + e);
+        }
+    }
+
     public static void closeTemplate() {
         try {
             Paragraph parrafo = new Paragraph();
