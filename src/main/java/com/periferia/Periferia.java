@@ -133,6 +133,7 @@ public class Periferia {
         try {
             if (driver != null) {
                 Thread.sleep(2000);
+                driver.close();
                 driver.quit();
                 log.info("Driver cerrado correctamente");
             }
