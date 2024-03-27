@@ -36,7 +36,7 @@ Llamado dependencia en pom.xml
 ``` Maven
 <dependencies>
  <dependency>
-  <groupId>com.periferia</groupId>
+  <groupId>com.periferiaitgroup</groupId>
      <artifactId>Library-QA</artifactId>
      <version><Library-QA.version></version>
  </dependency>
