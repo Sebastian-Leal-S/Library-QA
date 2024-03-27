@@ -15,7 +15,7 @@ Libray-QA se crea con la idea de mejorar dia a dia, basado en el código y neces
 
 ## Instalación
 
-> La version actual: **0.2-SNAPSHOT**
+> La version actual: **1.0-SNAPSHOT**
 
 ### Requisitos
 
@@ -28,12 +28,12 @@ Libray-QA se crea con la idea de mejorar dia a dia, basado en el código y neces
 Comando de instalación desde CMD
 
 ``` CMD
-mvn install:install-file -Dfile=<Ruta del JAR>\Library-QA.jar -DgroupId=com.periferia -DartifactId=Library-QA -Dversion=<Version Library-QA> -Dpackaging=jar
+mvn install:install-file -Dfile=<Ruta del JAR>\Library-QA.jar -DgroupId=com.periferiaitgroup -DartifactId=Library-QA -Dversion=<Version Library-QA> -Dpackaging=jar
 ```
 
 Llamado dependencia en pom.xml
 
-``` Maven
+``` MAVEN
 <dependencies>
  <dependency>
   <groupId>com.periferiaitgroup</groupId>
@@ -70,13 +70,25 @@ public void casoDePrueba000000(String user, String password) {
 ```
 
 ```JAVA
-public class TestPage {
+public class TestPage extends TestMap {
 	public void iniciarSesion(String user, String password) {
 		Periferia.sendKeys(inputUser, user, "Ingreso usuario");
 		Periferia.sendKeys(inputPwd, password, "Ingreso contraseña");
 		Periferia.click(btnLogin)
 		Periferia.capturarEvidencia("Evidencia login correcto con credenciales, usuario: " + user" y contraseña: " + password)
 	}
+}
+```
+
+```JAVA
+public class TestMap {
+    public TestMap(SelfHealingDriver driver){
+        super();
+    }
+
+    protected By inputUser = By.xpath("//input[@id='user']");
+    protected By inputPwd = By.xpath("//input[@id='password']");
+    protected By btnLogin = By.xpath("//button[@id='login']");
 }
 ```
 
@@ -87,24 +99,32 @@ Los principales métodos de interacción cuentan con la misma estructura de sobr
 > Los métodos no generan el paso dentro del archivo pdf si no se le indica un mensaje para la misma.
 
 ``` JAVA
-By button = By.xpath("xpathExpression");
-int tiempoEspera = 10;
+import com.periferiaitgroup.Periferia;
 
-Periferia.click(button);
-Periferia.click(button, tiempoEspera);
-Periferia.click(button, "Mensaje para la evidencia");
-Periferia.click(button, tiempoEspera, "Mensaje para la evidencia");
+public class test {
+	By button = By.xpath("xpathExpression");
+	int tiempoEspera = 10;
+
+	Periferia.click(button);
+	Periferia.click(button, tiempoEspera);
+	Periferia.click(button, "Mensaje para la evidencia");
+	Periferia.click(button, tiempoEspera, "Mensaje para la evidencia");	
+}
 ```
 
 También se encuentran implementados métodos para obtener información de la pagina web.
 
-```JAVA
-By titular = By.xpath("xpathExpression")
+``` JAVA
+import com.periferiaitgroup.Periferia;
 
-String texto_1 = Periferia.getText(titular);
-String texto_2 = Periferia.getText(titular, tiempoEspera);
-String texto_3 = Periferia.getText(titular, "Mensaje para la evidencia");
-String texto_4 = Periferia.getText(titular, tiempoEspera, "Mensaje para la evidencia");
+public class test {
+	By locator = By.xpath("xpathExpression")
+
+	String texto_1 = Periferia.getText(locator);
+	String texto_2 = Periferia.getText(locator, tiempoEspera);
+	String texto_3 = Periferia.getText(locator, "Mensaje para la evidencia");
+	String texto_4 = Periferia.getText(locator, tiempoEspera, "Mensaje para la evidencia");
+}
 ```
 
 Hay métodos que pueden devolver valores como obtenerTexto o obtenerUrl, que mas adelante se mostrar como se implementan.
