@@ -1,6 +1,6 @@
-package com.periferia.evidencia;
+package com.periferiaitgroup.evidencia;
 
-import com.periferia.utilities.HoraSistema;
+import com.periferiaitgroup.utilities.HoraSistema;
 import org.monte.media.Format;
 import org.monte.media.FormatKeys.MediaType;
 import org.monte.media.Registry;

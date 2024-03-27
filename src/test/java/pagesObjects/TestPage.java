@@ -1,7 +1,7 @@
 package pagesObjects;
 
 import com.epam.healenium.SelfHealingDriver;
-import com.periferia.Periferia;
+import com.periferiaitgroup.Periferia;
 import mapsObjects.TestMap;
 import org.testng.Assert;
 

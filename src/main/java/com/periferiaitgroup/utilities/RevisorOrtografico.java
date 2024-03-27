@@ -1,4 +1,4 @@
-package com.periferia.utilities;
+package com.periferiaitgroup.utilities;
 
 import org.languagetool.JLanguageTool;
 import org.languagetool.language.Spanish;

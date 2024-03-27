@@ -1,12 +1,12 @@
-package com.periferia.evidencia;
+package com.periferiaitgroup.evidencia;
 
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
-import com.periferia.utilities.HoraSistema;
-import com.periferia.utilities.TiempoEjecucion;
+import com.periferiaitgroup.utilities.HoraSistema;
+import com.periferiaitgroup.utilities.TiempoEjecucion;
 import org.openqa.selenium.By;
 
 import java.io.File;

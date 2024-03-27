@@ -1,10 +1,10 @@
-package com.periferia;
+package com.periferiaitgroup;
 
 import com.epam.healenium.SelfHealingDriver;
-import com.periferia.constantes.Navegador;
-import com.periferia.driver_manager.SeleniumDriver;
-import com.periferia.evidencia.GenerarEvidencia;
-import com.periferia.utilities.RevisorOrtografico;
+import com.periferiaitgroup.constantes.Navegador;
+import com.periferiaitgroup.driver_manager.SeleniumDriver;
+import com.periferiaitgroup.evidencia.GenerarEvidencia;
+import com.periferiaitgroup.utilities.RevisorOrtografico;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.languagetool.rules.RuleMatch;

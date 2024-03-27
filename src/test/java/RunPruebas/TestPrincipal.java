@@ -1,11 +1,11 @@
 package RunPruebas;
 
 import com.epam.healenium.SelfHealingDriver;
-import com.periferia.Periferia;
-import com.periferia.constantes.Navegador;
-import com.periferia.evidencia.GenerarEvidencia;
-import com.periferia.utilities.GestorArchivosExcel;
-import com.periferia.utilities.PropertyFileReader;
+import com.periferiaitgroup.Periferia;
+import com.periferiaitgroup.constantes.Navegador;
+import com.periferiaitgroup.evidencia.GenerarEvidencia;
+import com.periferiaitgroup.utilities.GestorArchivosExcel;
+import com.periferiaitgroup.utilities.PropertyFileReader;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;

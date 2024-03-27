@@ -1,7 +1,7 @@
-package com.periferia.evidencia;
+package com.periferiaitgroup.evidencia;
 
-import com.periferia.utilities.CaptureScreen;
-import com.periferia.utilities.GestorArchivos;
+import com.periferiaitgroup.utilities.CaptureScreen;
+import com.periferiaitgroup.utilities.GestorArchivos;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;

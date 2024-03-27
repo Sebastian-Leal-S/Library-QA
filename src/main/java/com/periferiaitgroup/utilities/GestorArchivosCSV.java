@@ -1,4 +1,4 @@
-package com.periferia.utilities;
+package com.periferiaitgroup.utilities;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
