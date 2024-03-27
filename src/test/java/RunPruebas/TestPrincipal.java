@@ -31,12 +31,6 @@ public class TestPrincipal {
         return GestorArchivosExcel.getTableArray("./Data/Data.xlsx", "Inicio");
     }
 
-    @DataProvider(name = "dpCSV")
-    public Object[][] dpGeneralCSV() {
-        //TODO: Extraer informacion de un archivo csv
-        return null;
-    }
-
     @BeforeTest
     public void beforeTest() {
         Properties properties = PropertyFileReader.readProperty();
@@ -66,18 +60,18 @@ public class TestPrincipal {
         GenerarEvidencia.finalizarEvidencia();
     }
 
-    @Test
+    @Test(dataProvider = "dpExcel")
     @Severity(SeverityLevel.NORMAL)
     @Story("Pruebas library-QA")
     @Description("Test para una prueba completa de Libreria-QA")
-    public void testComplete() {
+    public void testComplete(String parameterOne, String paramaterTwo) {
         String nameTest = Thread.currentThread().getStackTrace()[1].getMethodName();
 
         driver = Periferia.setUp(Navegador.CHROME, url);
 
         GenerarEvidencia.iniciarEvidencia(nameTest, nombreAnalista, url);
 
-        testPage.completeTest();
+        testPage.completeTest(parameterOne);
 
         GenerarEvidencia.finalizarEvidencia();
     }

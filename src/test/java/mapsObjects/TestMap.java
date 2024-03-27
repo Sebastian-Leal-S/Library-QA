@@ -8,7 +8,8 @@ public class TestMap {
         super();
     }
 
-    protected By inputUser = By.xpath("//input[@id='userName']");
-    protected By inputPassword = By.xpath("//input[@id='password']");
-    protected By btnLogin = By.xpath("//button[@id='login']");
+    protected By buttonColor = By.xpath("//button[@id='button-change-color']");
+    protected By textTest = By.xpath("//p[@id='text-visible']");
+    protected By inputTest = By.xpath("//input[@id='input-text']");
+    protected By buttonText = By.xpath("//button[@id='button-change-text']");
 }
