@@ -28,7 +28,7 @@ Libray-QA se crea con la idea de mejorar dia a dia, basado en el código y neces
 Comando de instalación desde CMD
 
 ``` CMD
-mvn install:install-file -Dfile=<Ruta del JAR>\Library-QA.jar -DgroupId=com.periferiaitgroup -DartifactId=Library-QA -Dversion=<Version Library-QA> -Dpackaging=jar
+mvn install:install-file -Dfile=< ruta-jar >\Library-QA.jar -DgroupId=com.periferiaitgroup -DartifactId=Library-QA -Dversion=< Version-Library-QA > -Dpackaging=jar
 ```
 
 Llamado dependencia en pom.xml
