@@ -41,6 +41,22 @@ public class TestPrincipal {
         testPage = new TestPage(driver);
     }
 
+    @Test(dataProvider = "dpExcel")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Pruebas library-QA")
+    @Description("Test para una prueba completa de Libreria-QA")
+    public void testComplete(String parameterOne, String paramaterTwo) {
+        String nameTest = Thread.currentThread().getStackTrace()[1].getMethodName();
+
+        driver = Periferia.setUp(Navegador.CHROME, url);
+
+        GenerarEvidencia.iniciarEvidencia(nameTest, nombreAnalista, url);
+
+        testPage.completeTest(parameterOne);
+
+        GenerarEvidencia.finalizarEvidencia();
+    }
+
     @Test
     @Severity(SeverityLevel.NORMAL)
 	@Story("Pruebas library-QA")
@@ -56,22 +72,6 @@ public class TestPrincipal {
         testPage.sendKeyTest();
         testPage.clearTest();
         testPage.getTextTest();
-
-        GenerarEvidencia.finalizarEvidencia();
-    }
-
-    @Test(dataProvider = "dpExcel")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Pruebas library-QA")
-    @Description("Test para una prueba completa de Libreria-QA")
-    public void testComplete(String parameterOne, String paramaterTwo) {
-        String nameTest = Thread.currentThread().getStackTrace()[1].getMethodName();
-
-        driver = Periferia.setUp(Navegador.CHROME, url);
-
-        GenerarEvidencia.iniciarEvidencia(nameTest, nombreAnalista, url);
-
-        testPage.completeTest(parameterOne);
 
         GenerarEvidencia.finalizarEvidencia();
     }
