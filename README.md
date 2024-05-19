@@ -25,6 +25,11 @@ Libray-QA se crea con la idea de mejorar dia a dia, basado en el código y neces
 
 ### Uso en proyectos maven
 
+- Maven versión 3.9.x o suoerior
+	- Establece la variable de entorno `M2_HOME` en la ubicacion donde se encuentre la carpeta bin de maven
+	- Para probar esto, intenta ejecutar el comando ```mvn -v```. Este comando debería mostrar la versión de Maven
+	  instalada junto con la versión de Java que está utilizando.
+
 Comando de instalación desde CMD
 
 ``` CMD
@@ -38,7 +43,7 @@ Llamado dependencia en pom.xml
  <dependency>
   <groupId>com.periferiaitgroup</groupId>
      <artifactId>Library-QA</artifactId>
-     <version><Library-QA.version></version>
+     <version>${Library-QA.version}</version>
  </dependency>
 </dependencies>
 ```
@@ -74,8 +79,8 @@ public class TestPage extends TestMap {
 	public void iniciarSesion(String user, String password) {
 		Periferia.sendKeys(inputUser, user, "Ingreso usuario");
 		Periferia.sendKeys(inputPwd, password, "Ingreso contraseña");
-		Periferia.click(btnLogin)
-		Periferia.capturarEvidencia("Evidencia login correcto con credenciales, usuario: " + user" y contraseña: " + password)
+		Periferia.click(btnLogin);
+		Periferia.capturarEvidencia("Evidencia login correcto con credenciales, usuario: " + user + " y contraseña: " + password);
 	}
 }
 ```
@@ -96,7 +101,7 @@ public class TestMap {
 
 Los principales métodos de interacción cuentan con la misma estructura de sobrecarga, todos requerirán siempre de un localizador, y si se desea se puede variar el tiempo de espera, un mensaje para la evidencia o ambos parámetros.
 
-> Los métodos no generan el paso dentro del archivo pdf si no se le indica un mensaje para la misma.
+> Los métodos no generan evidencia dentro del archivo pdf si no se le indica un mensaje para la misma.
 
 ``` JAVA
 import com.periferiaitgroup.Periferia;
