@@ -12,6 +12,7 @@ public class PropertyFileReader {
 
     /**
      * Lee las propiedades desde un archivo de configuración y devuelve un objeto Properties.
+     * La ruta por defecto del archivo de configuracion es 'src/main/resources/config.properties'
      *
      * @return Un objeto Properties que contiene las propiedades cargadas desde el archivo de configuración.
      */
