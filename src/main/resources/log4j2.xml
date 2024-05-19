@@ -16,7 +16,7 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="com.Periferia" level="debug" additivity="false">
+        <Logger name="com.periferiaitgroup" level="debug" additivity="false">
             <AppenderRef ref="file"/>
         </Logger>
         <Root level="info">
