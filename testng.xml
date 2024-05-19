@@ -1,11 +1,3 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="suite1">
-    <listeners>
-        <listener class-name="com.periferiaitgroup.utilities.TestListener"/>
-    </listeners>
-    <test name="test1">
-        <classes>
-            <class name="RunPruebas.TestPrincipal"/>
-        </classes>
-    </test>
+<suite name="">
 </suite>
