@@ -11,6 +11,26 @@ public class TestPage extends TestMap {
         super(driver);
     }
 
+    public void completeTest(String parameterOne) {
+        Periferia.click(buttonColor, "Clic para cambiar color");
+        Periferia.sendKeys(inputTest, parameterOne, "Envio de texto");
+        Periferia.click(buttonText);
+
+        Assert.assertEquals(parameterOne, Periferia.getText(textTest));
+        Periferia.clear(inputTest);
+
+        Periferia.sendKeys(inputTest, "Texto con erroes ortograficos");
+        Periferia.click(buttonText, "Clic para cambiar texto");
+
+        Periferia.revisarOrtografia(textTest);
+
+        Periferia.sendKeys(inputTest, "Texto enviado");
+        Periferia.click(buttonColor);
+        Periferia.capturarEvidencia("Mensaje para generar evidencia");
+
+        Periferia.isSelected(buttonColor);
+    }
+
     public void clickTest() {
         Periferia.click(buttonColor);
 
@@ -48,22 +68,5 @@ public class TestPage extends TestMap {
         Periferia.clear(inputTest, "Limpiar campo");
 
         Periferia.clear(inputTest, 5, "Limpiar campo");
-    }
-
-    public void completeTest(String parameterOne) {
-        Periferia.click(buttonColor, "Clic para cambiar color");
-        Periferia.sendKeys(inputTest, parameterOne, "Envio de texto");
-        Periferia.click(buttonText);
-
-        Periferia.revisarOrtografia(textTest);
-
-        Assert.assertEquals(parameterOne, Periferia.getText(textTest));
-        Periferia.clear(inputTest);
-
-        Periferia.sendKeys(inputTest, "Como estan?");
-        Periferia.click(buttonColor);
-        Periferia.capturarEvidencia("Esto es para la evidencia");
-
-        Periferia.isSelected(buttonColor);
     }
 }
