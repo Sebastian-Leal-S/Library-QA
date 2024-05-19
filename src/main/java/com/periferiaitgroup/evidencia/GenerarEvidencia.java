@@ -14,7 +14,7 @@ import java.io.File;
  */
 public class GenerarEvidencia {
     private static final String EVIDENCE_PATH = "./outputData/";
-    private static File rutaPngEvidencia;
+    private static File rutaCarpetaEvidencia;
     protected static Logger log = LogManager.getLogger(GenerarEvidencia.class);
 
     private GenerarEvidencia() {
@@ -31,11 +31,11 @@ public class GenerarEvidencia {
     public static void iniciarEvidencia(String nameTest, String nameAnalyst, String urlPage) {
 
         GestorArchivos.eliminarCarpeta(EVIDENCE_PATH);
-        rutaPngEvidencia = GestorArchivos.crearCarpetaEvidencia(EVIDENCE_PATH, nameTest);
-        log.info("La evidencia se guardo en {} ", rutaPngEvidencia.getPath());
+        rutaCarpetaEvidencia = GestorArchivos.crearCarpetaEvidencia(EVIDENCE_PATH, nameTest);
+        log.info("La evidencia se guardo en {} ", rutaCarpetaEvidencia.getPath());
 
-        GenerarReportePDF.createTemplate(rutaPngEvidencia, nameTest, nameAnalyst, urlPage);
-        GenerarReporteVideo.startRecording(rutaPngEvidencia, nameTest);
+        GenerarReportePDF.createTemplate(rutaCarpetaEvidencia, nameTest, nameAnalyst, urlPage);
+        GenerarReporteVideo.startRecording(rutaCarpetaEvidencia, nameTest);
 
         log.info("Se inicio la creacion de las evidencias");
     }
@@ -57,7 +57,7 @@ public class GenerarEvidencia {
      * @param mensajeEvidencia Mensaje que se mostrara en el reporte
      */
     public static void capturarEvidencia(WebDriver driver, String mensajeEvidencia) {
-        String rutaImg = CaptureScreen.captureScreen(driver, rutaPngEvidencia);
+        String rutaImg = CaptureScreen.captureScreen(driver, rutaCarpetaEvidencia);
         GenerarReportePDF.createBody(rutaImg, mensajeEvidencia);
         GestorArchivos.eliminarArchivo(rutaImg);
     }
@@ -70,7 +70,7 @@ public class GenerarEvidencia {
      * @param locator Localizador del elemento que genero el error
      */
     public static void capturarEvidencia(WebDriver driver, String mensajeError, By locator) {
-        String rutaImg = CaptureScreen.captureScreen(driver, rutaPngEvidencia);
+        String rutaImg = CaptureScreen.captureScreen(driver, rutaCarpetaEvidencia);
         GenerarReportePDF.createErrorBody(rutaImg, mensajeError, locator);
         GestorArchivos.eliminarArchivo(rutaImg);
     }
