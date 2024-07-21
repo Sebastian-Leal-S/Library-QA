@@ -7,6 +7,7 @@
 	<groupId>com.periferiaitgroup</groupId>
 	<artifactId>Library-QA</artifactId>
 	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
 	<properties>
 		<maven.compiler.source>21</maven.compiler.source>
@@ -39,20 +40,22 @@
 		ejecucion -->
 		<healenium-web.version>3.2.1</healenium-web.version>
 
-        <!-- Gestion version dependencias verificar estilo y gramatica -->
-        <languagetool.version>6.3</languagetool.version>
+		<!-- Gestion version dependencias verificar estilo y gramatica -->
+		<languagetool.version>6.3</languagetool.version>
 	</properties>
 
 	<dependencies>
 		<!-- Dependencias para automatizacion -->
 
-		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<!--
+		https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-support -->
+		<!--
+		https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-support -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-support</artifactId>
@@ -64,7 +67,8 @@
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+		<!--
+		https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
 		<dependency>
 			<groupId>io.github.bonigarcia</groupId>
 			<artifactId>webdrivermanager</artifactId>
@@ -82,13 +86,15 @@
 
 		<!-- Dependencias para registros (logger) -->
 
-		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+		<!--
+		https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-jpl -->
+		<!--
+		https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-jpl -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-jpl</artifactId>
@@ -112,7 +118,8 @@
 
 		<!-- Dependencia para generaracion video -->
 
-		<!-- https://mvnrepository.com/artifact/com.github.stephenc.monte/monte-screen-recorder -->
+		<!--
+		https://mvnrepository.com/artifact/com.github.stephenc.monte/monte-screen-recorder -->
 		<dependency>
 			<groupId>com.github.stephenc.monte</groupId>
 			<artifactId>monte-screen-recorder</artifactId>
@@ -149,46 +156,57 @@
 			<version>${healenium-web.version}</version>
 		</dependency>
 
-        <!-- Dependencia para verificar estilo y gramatica -->
+		<!-- Dependencia para verificar estilo y gramatica -->
 
-		<!-- https://mvnrepository.com/artifact/org.languagetool/languagetool-core -->
-        <dependency>
-            <groupId>org.languagetool</groupId>
-            <artifactId>languagetool-core</artifactId>
-            <version>${languagetool.version}</version>
-        </dependency>
+		<!--
+		https://mvnrepository.com/artifact/org.languagetool/languagetool-core -->
+		<dependency>
+			<groupId>org.languagetool</groupId>
+			<artifactId>languagetool-core</artifactId>
+			<version>${languagetool.version}</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.languagetool/language-es -->
-        <dependency>
-            <groupId>org.languagetool</groupId>
-            <artifactId>language-es</artifactId>
-            <version>${languagetool.version}</version>
-        </dependency>
+		<dependency>
+			<groupId>org.languagetool</groupId>
+			<artifactId>language-es</artifactId>
+			<version>${languagetool.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
-		<sourceDirectory>src/main/java</sourceDirectory>
-		<outputDirectory>target/classes</outputDirectory>
-		<testSourceDirectory>src/test/java</testSourceDirectory>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-		</resources>
-		<testResources>
-			<testResource>
-				<directory>src/test/resources</directory>
-			</testResource>
-		</testResources>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
-				</configuration>
-			</plugin>
-		</plugins>
+	    <plugins>
+	        <!-- Plugin para generar el JAR -->
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-jar-plugin</artifactId>
+	            <version>3.2.0</version>
+	            <configuration>
+	                <archive>
+	                    <manifest>
+	                        <addClasspath>true</addClasspath>
+	                        <mainClass>com.periferiaitgroup.Periferia</mainClass>
+	                    </manifest>
+	                </archive>
+	            </configuration>
+	        </plugin>
+	        <!-- Plugin para generar Javadoc -->
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-javadoc-plugin</artifactId>
+	            <version>3.3.1</version>
+	            <executions>
+	                <execution>
+	                    <goals>
+	                        <goal>javadoc</goal>
+	                    </goals>
+	                    <phase>package</phase>
+	                    <configuration>
+	                        <destDir>${project.build.directory}/apidocs</destDir>
+	                    </configuration>
+	                </execution>
+	            </executions>
+	        </plugin>
+	    </plugins>
 	</build>
+	
 </project>

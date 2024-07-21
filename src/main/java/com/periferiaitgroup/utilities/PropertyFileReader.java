@@ -4,8 +4,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * Clase utilitaria para leer los datos de un archivo .properties.
+ */
 public class PropertyFileReader {
 
+	/**
+     * Constructor privado para prevenir la instanciación de la clase utilitaria.
+     * 
+     * @throws IllegalStateException si se intenta instanciar la clase.
+     */
     private PropertyFileReader() {
         throw new IllegalStateException("Utility class");
     }

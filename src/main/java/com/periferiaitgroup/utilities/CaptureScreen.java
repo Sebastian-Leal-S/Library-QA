@@ -9,7 +9,27 @@ import org.openqa.selenium.WebDriver;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Clase utilitaria para capturar pantallas durante la ejecución de pruebas automatizadas con Selenium WebDriver.
+ */
 public class CaptureScreen {
+	
+	 /**
+     * Constructor privado para prevenir la instanciación de la clase utilitaria.
+     * 
+     * @throws IllegalStateException si se intenta instanciar la clase.
+     */
+	private CaptureScreen() {
+        throw new IllegalStateException("Utility class");
+    }
+	
+	/**
+     * Captura una imagen de la pantalla actual del navegador y la guarda en la ruta especificada.
+     * 
+     * @param driver el WebDriver que se está utilizando para la automatización.
+     * @param rutaCarpeta la carpeta donde se guardará la imagen de la captura de pantalla.
+     * @return la ruta completa del archivo de imagen capturado.
+     */
     public static String captureScreen(WebDriver driver, File rutaCarpeta) {
         String hora = HoraSistema.currentDate("HH-mm-ss");
 

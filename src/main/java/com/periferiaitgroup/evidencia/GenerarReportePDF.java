@@ -14,10 +14,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Clase utilitaria para generar reportes PDF con diferentes secciones, incluyendo
+ * encabezados, cuerpo del documento, errores y sugerencias ortográficas.
+ */
 public class GenerarReportePDF {
 
     private static final String MARCA_DE_AGUA_PNG = "./imagenes/marcaDeAgua.png";
-    private static final String LOGO_PNG = "./imagenes/logo.png";
+    private static final String LOGO_PNG = "./imagenes/LogoClient.png";
     private static final Document documento = new Document();
     private static boolean documentoCreado = false;
     private static int imgContador = 0;
@@ -29,10 +33,23 @@ public class GenerarReportePDF {
 
     private static final String FORMATO_FECHA = "HH:mm:ss";
 
+    /**
+     * Constructor privado para prevenir la instanciación de la clase utilitaria.
+     * 
+     * @throws IllegalStateException si se intenta instanciar la clase.
+     */
     private GenerarReportePDF() {
         throw new IllegalStateException("Utility class");
     }
 
+    /**
+     * Crea la plantilla del reporte PDF con los datos iniciales.
+     * 
+     * @param filePath la ruta donde se guardará el archivo PDF.
+     * @param nameTest el nombre de la prueba.
+     * @param nameAnalyst el nombre del analista.
+     * @param url la URL de la aplicación de prueba.
+     */
     public static void createTemplate(File filePath, String nameTest, String nameAnalyst, String url) {
         try {
             TiempoEjecucion.start();
@@ -90,6 +107,12 @@ public class GenerarReportePDF {
         }
     }
 
+    /**
+     * Agrega el cuerpo del documento con una imagen y un mensaje.
+     * 
+     * @param rutaImagen la ruta de la imagen a agregar.
+     * @param mensaje el mensaje a incluir en el documento.
+     */
     public static void createBody(String rutaImagen, String mensaje) {
         if (!documentoCreado) {
             return;
@@ -121,6 +144,13 @@ public class GenerarReportePDF {
         }
     }
 
+    /**
+     * Agrega el cuerpo del documento con una imagen, un mensaje de error y un localizador.
+     * 
+     * @param rutaImagen la ruta de la imagen a agregar.
+     * @param errorMessage el mensaje de error a incluir en el documento.
+     * @param locator el localizador del elemento donde ocurrió el error.
+     */
     public static void createErrorBody(String rutaImagen, String errorMessage, By locator) {
         if (!documentoCreado) {
             return;
@@ -163,6 +193,12 @@ public class GenerarReportePDF {
         }
     }
 
+    /**
+     * Agrega sugerencias ortográficas al documento PDF.
+     * 
+     * @param palabraConError la palabra con error ortográfico.
+     * @param sugerencias las sugerencias de corrección ortográfica.
+     */
     public static void addSugerenciaOrtografia(String palabraConError, String sugerencias) {
         try {
             Paragraph title = new Paragraph();
@@ -182,6 +218,9 @@ public class GenerarReportePDF {
         }
     }
 
+    /**
+     * Cierra la plantilla del reporte PDF agregando la hora de finalización y el tiempo de ejecución.
+     */
     public static void closeTemplate() {
         try {
             Paragraph parrafo = new Paragraph();
@@ -199,6 +238,9 @@ public class GenerarReportePDF {
         }
     }
 
+    /**
+     * Clase interna para agregar encabezados y pies de página al documento PDF.
+     */
     private static class Footer extends PdfPageEventHelper {
         @Override
         public void onEndPage(PdfWriter writer, Document document) {
@@ -222,6 +264,13 @@ public class GenerarReportePDF {
         }
     }
 
+    /**
+     * Convierte un archivo PDF en una lista de cadenas de texto.
+     * 
+     * @param file la ruta del archivo PDF.
+     * @return una lista de cadenas de texto que representa el contenido del PDF.
+     * @throws IOException si ocurre un error de entrada/salida.
+     */
     public static ArrayList<String> pdfATexto(String file) throws IOException {
         ArrayList<String> lineasPDF = new ArrayList<>();
         // LEEMOS EL ARCHIVO

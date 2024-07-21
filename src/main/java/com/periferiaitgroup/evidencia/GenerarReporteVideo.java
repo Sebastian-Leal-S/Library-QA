@@ -19,17 +19,42 @@ import static org.monte.media.AudioFormatKeys.MediaTypeKey;
 import static org.monte.media.AudioFormatKeys.MimeTypeKey;
 import static org.monte.media.VideoFormatKeys.*;
 
+/**
+ * Clase para generar reportes de video mediante la grabación de la pantalla.
+ * Extiende la funcionalidad de ScreenRecorder para personalizar la creación del archivo de video.
+ */
 public class GenerarReporteVideo extends ScreenRecorder {
 
     private static ScreenRecorder screenRecorder;
     private final String nameFile;
-
+    
+    /**
+     * Constructor privado para inicializar los parámetros de grabación de video.
+     * 
+     * @param cfg            la configuración gráfica utilizada para la grabación.
+     * @param captureArea    el área de la pantalla a capturar.
+     * @param fileFormat     el formato del archivo de video.
+     * @param screenFormat   el formato de video de la pantalla.
+     * @param mouseFormat    el formato del video del mouse.
+     * @param audioFormat    el formato del audio.
+     * @param movieFolder    la carpeta donde se guardará el video.
+     * @param nameFile       el nombre del archivo de video.
+     * @throws IOException   si ocurre un error de entrada/salida.
+     * @throws AWTException  si ocurre un error relacionado con AWT.
+     */
     private GenerarReporteVideo(GraphicsConfiguration cfg, Rectangle captureArea, Format fileFormat, Format screenFormat, Format mouseFormat, Format audioFormat, File movieFolder, String
             nameFile) throws IOException, AWTException {
         super(cfg, captureArea, fileFormat, screenFormat, mouseFormat, audioFormat, movieFolder);
         this.nameFile = nameFile;
     }
 
+    /**
+     * Crea el archivo de video con el nombre y formato especificados.
+     * 
+     * @param fileFormat el formato del archivo de video.
+     * @return el archivo de video creado.
+     * @throws IOException si ocurre un error de entrada/salida.
+     */
     @Override
     protected File createMovieFile(Format fileFormat) throws IOException {
 
@@ -44,6 +69,12 @@ public class GenerarReporteVideo extends ScreenRecorder {
         return new File(movieFolder, nameFile + "_" + horaActual + "." + Registry.getInstance().getExtension(fileFormat));
     }
 
+    /**
+     * Inicia la grabación de la pantalla y guarda el archivo de video en la ruta especificada.
+     * 
+     * @param filePath la ruta donde se guardará el archivo de video.
+     * @param fileName el nombre del archivo de video.
+     */
     public static void startRecording(File filePath, String fileName) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = screenSize.width;
@@ -75,6 +106,9 @@ public class GenerarReporteVideo extends ScreenRecorder {
 
     }
 
+    /**
+     * Detiene la grabación de la pantalla.
+     */
     public static void stopRecording(){
         try {
             screenRecorder.stop();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
+<Configuration status="WARN">
     <Properties>
         <Property name="filepath">./logs</Property>
     </Properties>
@@ -8,11 +8,13 @@
             <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
         </Console>
         <RollingFile name="file" fileName="${filepath}/logEvidencias.log"
-                     filePattern="${filepath}/logEvidencias-%d{HH-mm-ss}.log">
+                     filePattern="${filepath}/logEvidencias-%d{yyyy-MM-dd-HH-mm-ss}.log">
             <PatternLayout>
-                <pattern>%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</pattern>
+                <Pattern>%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout>
-            <SizeBasedTriggeringPolicy size="2 MB"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
         </RollingFile>
     </Appenders>
     <Loggers>
@@ -23,4 +25,4 @@
             <AppenderRef ref="console"/>
         </Root>
     </Loggers>
-</configuration>
+</Configuration>

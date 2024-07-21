@@ -16,7 +16,9 @@ import static org.testng.Assert.assertTrue;
 
 public class GestorArchivos {
 	
-	private GestorArchivos() {}
+	private GestorArchivos() {
+        throw new IllegalStateException("Utility class");
+    }
 	
     /**
      * Crea una carpeta en la ruta especificada si la evidencia está habilitada.
@@ -124,7 +126,7 @@ public class GestorArchivos {
      * @param fileDirectoryPath - Ruta a donde se encuentra el archivo
      * @param nameFile - nombre del archivo que se quiere validar
      */
-    public void validarArchivo(String fileDirectoryPath, String nameFile) {
+    public static void validarArchivo(String fileDirectoryPath, String nameFile) {
         File fileToCheck = new File(fileDirectoryPath, nameFile);
         assertTrue(fileToCheck.exists(), "File " + nameFile + " was not found in the folder " + fileDirectoryPath + ".");
     }

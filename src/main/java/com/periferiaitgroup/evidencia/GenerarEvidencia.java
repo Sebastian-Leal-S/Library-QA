@@ -17,6 +17,11 @@ public class GenerarEvidencia {
     private static File rutaCarpetaEvidencia;
     protected static Logger log = LogManager.getLogger(GenerarEvidencia.class);
 
+    /**
+     * Constructor privado para prevenir la instanciación de la clase utilitaria.
+     * 
+     * @throws IllegalStateException si se intenta instanciar la clase.
+     */
     private GenerarEvidencia() {
         throw new IllegalStateException("Utility class");
     }
@@ -75,6 +80,12 @@ public class GenerarEvidencia {
         GestorArchivos.eliminarArchivo(rutaImg);
     }
 
+    /**
+     * Captura evidencia de un error ortografico y su sugerencia correspondiente en un reporte PDF.
+     * 
+     * @param error la descripción del error ortográfico encontrado.
+     * @param sugerencia la sugerencia de corrección para el error ortográfico.
+     */
     public static void capturarEvidencia(String error, String sugerencia) {
         GenerarReportePDF.addSugerenciaOrtografia(error, sugerencia);
     }

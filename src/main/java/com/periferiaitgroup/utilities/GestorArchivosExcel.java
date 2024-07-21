@@ -7,12 +7,22 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ * Clase utilitaria para gestionar y leer datos de archivos Excel.
+ */
 public class GestorArchivosExcel {
 
     private static XSSFSheet excelWSheet;
     private static XSSFWorkbook excelWBook;
     private static XSSFCell cell;
 
+    /**
+     * Obtiene los datos de una celda específica en el archivo Excel.
+     * 
+     * @param rowNum el número de fila de la celda.
+     * @param colNum el número de columna de la celda.
+     * @return los datos de la celda como una cadena de texto.
+     */
     private static String getCellData(int rowNum, int colNum) {
         cell = excelWSheet.getRow(rowNum).getCell(colNum);
         String CellData = "";
@@ -29,6 +39,13 @@ public class GestorArchivosExcel {
         return CellData;
     }
 
+    /**
+     * Lee los datos de una hoja de un archivo Excel y los retorna en un arreglo de objetos bidimensional.
+     * 
+     * @param filePath  la ruta del archivo Excel.
+     * @param sheetName el nombre de la hoja de Excel a leer.
+     * @return un arreglo bidimensional de objetos que contiene los datos de la hoja de Excel.
+     */
     public static Object[][] getTableArray(String filePath, String sheetName) {
         String[][] tabArray = null;
 

@@ -3,8 +3,19 @@ package com.periferiaitgroup.utilities;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Clase utilitaria para obtener la hora y fecha actual del sistema en diferentes formatos.
+ */
 public class HoraSistema {
-    private  HoraSistema(){}
+	
+	/**
+     * Constructor privado para prevenir la instanciación de la clase utilitaria.
+     * 
+     * @throws IllegalStateException si se intenta instanciar la clase.
+     */
+    private  HoraSistema(){
+    	throw new IllegalStateException("Utility class");
+    }
 
     /**
      * Genera una cadena de texto con la hora actual del sistema en formato "dd-MM-yyyy" Ejemplo: 06-09-2003

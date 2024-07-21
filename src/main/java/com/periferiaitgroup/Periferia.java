@@ -44,6 +44,11 @@ public class Periferia {
      * @param navegador El navegador que se utilizará para la prueba.
      * @return El controlador de Selenium configurado y listo para usar.
      * @throws WebDriverException Si ocurre un error al inicializar el controlador de Selenium.
+     *<pre>
+	 * {@code
+	 * Periferia.setUp(Navegador.CHROME);
+	 * }
+	 * </pre>
      */
     public static SelfHealingDriver setUp(Navegador navegador) {
         try {
@@ -63,6 +68,13 @@ public class Periferia {
      * @param url       La URL a la que se desea navegar.
      * @return El controlador de Selenium configurado y listo para usar.
      * @throws WebDriverException Si ocurre un error al inicializar el controlador de Selenium.
+     * 
+     *<pre>
+	 * {@code
+	 * String url = "www.prueba.com"
+	 * Periferia.setUp(Navegador.CHROME, url);
+	 * }
+	 * </pre>
      */
     public static SelfHealingDriver setUp(Navegador navegador, String url) {
         try {
@@ -80,7 +92,7 @@ public class Periferia {
     /**
      * Configura y inicializa el controlador de Selenium con el navegador especificado.
      *
-     * @param navegador El nombre del navegador que se utilizará para la prueba (por ejemplo, "CHROME", "FIREFOX" o "EDGE").
+     * @param navegador El nombre del navegador que se utilizará para la prueba ("CHROME", "FIREFOX" o "EDGE").
      * @return El controlador de Selenium configurado y listo para usar.
      * @throws IllegalArgumentException Si el nombre del navegador no es válido.
      * @throws WebDriverException Si ocurre un error al inicializar el controlador de Selenium.
@@ -1024,31 +1036,6 @@ public class Periferia {
         } catch (Exception e) {
             log.fatal("No fue posible salir del frame, por el error {}", e.getMessage());
             throw new IllegalStateException("No se pudo salir del frame.", e);
-        }
-    }
-
-    /**
-     * Captura una evidencia de la pantalla actual.
-     *
-     * @param mensaje El mensaje que se desea capturar en la evidencia.
-     */
-    public static void capturarEvidencia(String mensaje) {
-        GenerarEvidencia.capturarEvidencia(driver, mensaje);
-    }
-
-    /**
-     * Captura una evidencia de la pantalla actual.
-     *
-     * @param mensaje      El mensaje que se desea capturar en la evidencia.
-     * @param tiempoEspera El tiempo de espera en segundos para capturar la evidencia.
-     * @throws InterruptedException Si ocurre un error al intentar capturar la evidencia.
-     */
-    public static void capturarEvidencia(String mensaje, int tiempoEspera) {
-        try {
-            Thread.sleep(tiempoEspera * 1000L);
-            GenerarEvidencia.capturarEvidencia(driver, mensaje);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 

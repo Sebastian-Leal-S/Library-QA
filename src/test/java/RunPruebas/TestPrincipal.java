@@ -38,40 +38,22 @@ public class TestPrincipal {
         nombreAnalista = properties.getProperty("ANALISTA");
 
         // Instaciación de las pageObj
-        testPage = new TestPage(driver);
+        testPage = new TestPage();
     }
 
     @Test(dataProvider = "dpExcel")
     @Severity(SeverityLevel.NORMAL)
     @Story("Pruebas library-QA")
     @Description("Test para una prueba completa de Libreria-QA")
-    public void testComplete(String parameterOne, String paramaterTwo) {
+    public void testComplete(String generarEvidencia, String usuario, String contrasenna) {
+
         String nameTest = Thread.currentThread().getStackTrace()[1].getMethodName();
 
         driver = Periferia.setUp(Navegador.CHROME, url);
 
         GenerarEvidencia.iniciarEvidencia(nameTest, nombreAnalista, url);
 
-        testPage.completeTest(parameterOne);
-
-        GenerarEvidencia.finalizarEvidencia();
-    }
-
-    @Test
-    @Severity(SeverityLevel.NORMAL)
-	@Story("Pruebas library-QA")
-    @Description("Test para probar Libreria-QA")
-    public void testMethods() {
-        String nameTest = Thread.currentThread().getStackTrace()[1].getMethodName();
-
-        driver = Periferia.setUp(Navegador.CHROME, url);
-
-        GenerarEvidencia.iniciarEvidencia(nameTest, nombreAnalista, url);
-
-        testPage.clickTest();
-        testPage.sendKeyTest();
-        testPage.clearTest();
-        testPage.getTextTest();
+        testPage.completeTest(usuario, contrasenna);
 
         GenerarEvidencia.finalizarEvidencia();
     }
